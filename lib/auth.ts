@@ -1,6 +1,8 @@
 import {betterAuth} from "better-auth"
 import {prismaAdapter} from "better-auth/adapters/prisma"
 import {prisma} from "@/lib/prisma";
+import {emailOTP} from "better-auth/plugins";
+import {resend} from "@/lib/resend";
 
 export const auth = betterAuth({
 
@@ -12,6 +14,22 @@ export const auth = betterAuth({
         enabled: true,
         autoSignIn: true,
     },
+
+    plugins: [
+        emailOTP({
+            async sendVerificationOTP({email, otp}) {
+
+                await resend.emails.send({
+                    from: "LearnersHub <onboarding@resend.com>",
+                    to: [email],
+                    subject: "LearnersHub - verify your OTP",
+                    html: `<p>Your OTP is <strong>${otp}</strong></p>`
+                })
+            }
+        })
+    ],
+
+
 
     socialProviders: {
         github: {
