@@ -22,7 +22,7 @@ export const auth = betterAuth({
                 await resend.emails.send({
                     from: "LearnersHub <onboarding@resend.com>",
                     to: [email],
-                    subject: "LearnersHub - verify your OTP",
+                    subject: "LearnersHub - verify your Email",
                     html: `<p>Your OTP is <strong>${otp}</strong></p>`
                 })
             }
