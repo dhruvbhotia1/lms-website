@@ -17,7 +17,7 @@ export default function AuthLayout({children}: Props) {
     return (
        <div className={"relative flex min-h-svh items-center justify-center"}>
 
-           <Link href={"/public"} className={buttonVariants({
+           <Link href={"/"} className={buttonVariants({
                variant: "outline",
                className: "absolute top-4 left-4"})}>
 
@@ -26,7 +26,7 @@ export default function AuthLayout({children}: Props) {
                Back
            </Link>
            <div className={"flex w-full max-w-sm flex-col gap-6"}>
-               <Link href={"/public"} className={"flex items-center gap-2 self-center font-medium"}>
+               <Link href={"/"} className={"flex items-center gap-2 self-center font-medium"}>
 
                    <Image src={"/logo.svg"} alt={"logo"} height={40} width={40}/>
 

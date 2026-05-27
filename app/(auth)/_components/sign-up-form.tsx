@@ -65,15 +65,34 @@ export default function SignUpForm () {
     const handleEmailSignUp = async () => {
 
         emailTransition(async () => {
-            await authClient.signIn.email({
+            await authClient.signUp.email({
+                name,
                 email,
                 password,
-                callbackURL: "/"
-            }, {
-                onSuccess: () => {
-                    toast.success("Login successful!");
+                fetchOptions: {
+                    onSuccess: async () => {
+
+                        await authClient.emailOtp.sendVerificationOtp({
+                            email,
+                            type: "email-verification",
+                            fetchOptions: {
+                                onSuccess: () => {
+
+                                    toast.success("Sign up successful!. Check your email for an OTP to verify it. ")
+
+                                    router.push("/verify-request")
+                                }
+                            }
+
+                        })
+                    },
+                    onError: (ctx) => {
+                        router.push('/sign-up');
+                        console.log(ctx.error.message);
+                        toast.error("An error occurred while trying to create your account.");
+                    }
                 }
-            });
+            })
         })
 
 

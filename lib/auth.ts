@@ -19,12 +19,21 @@ export const auth = betterAuth({
         emailOTP({
             async sendVerificationOTP({email, otp}) {
 
-                await resend.emails.send({
-                    from: "LearnersHub <onboarding@resend.com>",
+                const {data, error} = await resend.emails.send({
+                    from: "LearnersHub <onboarding@resend.dev>",
                     to: [email],
-                    subject: "LearnersHub - verify your Email",
-                    html: `<p>Your OTP is <strong>${otp}</strong></p>`
+                    subject: "Verify your email using this OTP",
+                    html: `Your OTP to verify your email for LearnersHub is ${otp}`
                 })
+
+                if(error) {
+                    console.error("🚨 RESEND ERROR:", error);
+                    throw new Error("Failed to send verification email");
+                }
+
+                console.log("Email sent. with id", data?.id);
+
+
             }
         })
     ],

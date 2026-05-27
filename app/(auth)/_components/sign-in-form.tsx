@@ -25,6 +25,8 @@ export default function SignInForm () {
 
     const [emailPending, emailTransition] = useTransition();
 
+    const [error, setError] = useState("");
+
     const handleGithubSignIn = async () => {
 
         githubTransition(async () => {
@@ -61,15 +63,22 @@ export default function SignInForm () {
     const handleEmailSignIn = async () => {
 
         emailTransition(async () => {
-            await authClient.signIn.email({
-                email,
-                password,
-                callbackURL: "/"
-            }, {
-                onSuccess: () => {
-                    toast.success("Login successful!");
-                }
-            });
+           const {data, error} = await authClient.signIn.email({
+               email,
+               password,
+               fetchOptions: {
+                   onSuccess: () => {
+                       toast.success("Login successful!");
+
+                   },
+
+                   onError: (error) => {
+
+                       setError(error.error.message);
+
+                   }
+               }
+           })
         })
 
 
