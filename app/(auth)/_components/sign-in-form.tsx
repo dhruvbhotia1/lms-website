@@ -10,6 +10,7 @@ import {useState, useTransition} from "react";
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";
 import {Loader2Icon} from "lucide-react";
+import {TriangleAlert} from "lucide-react";
 
 export default function SignInForm () {
 
@@ -25,7 +26,7 @@ export default function SignInForm () {
 
     const [emailPending, emailTransition] = useTransition();
 
-    const [error, setError] = useState("");
+    const [loginError, setLoginError] = useState("");
 
     const handleGithubSignIn = async () => {
 
@@ -36,6 +37,13 @@ export default function SignInForm () {
             }, {
                 onSuccess: () => {
                     toast.success("Login successful!");
+
+                },
+
+                onError: (error) => {
+
+                    setLoginError(error.error.message);
+                    toast.error("An error occurred!");
 
                 }
 
@@ -54,6 +62,13 @@ export default function SignInForm () {
             }, {
                 onSuccess: () => {
                     toast.success("Login successful!")
+                },
+
+                onError: (error) => {
+
+                    setLoginError(error.error.message);
+                    toast.error("An error occurred!");
+
                 }
             });
         })
@@ -69,12 +84,14 @@ export default function SignInForm () {
                fetchOptions: {
                    onSuccess: () => {
                        toast.success("Login successful!");
+                       router.replace('/');
 
                    },
 
                    onError: (error) => {
 
-                       setError(error.error.message);
+                       setLoginError(error.error.message);
+                       toast.error("An error occurred!");
 
                    }
                }
@@ -136,9 +153,9 @@ export default function SignInForm () {
                 </div>
 
 
-                <div className={"grid gap-6"}>
+                <div className={"grid gap-y-4"}>
 
-                    <div className={"grid gap-y-6"}>
+                    <div className={"grid gap-y-6 mb-3"}>
                         <div className={"grid gap-y-3"}>
                             <Label htmlFor={"email"}>Email</Label>
 
@@ -151,6 +168,16 @@ export default function SignInForm () {
                             <Input type={"password"} placeholder={"Enter your password"} value={password} onChange={(e) => setPassword(e.target.value)} disabled={emailPending}/>
                         </div>
                     </div>
+
+                    {
+                        !!loginError && (
+
+                            <div className={"bg-destructive p-3 rounded-md flex items-center gap-x-2 text-sm  mb-4 text-white font-semibold justify-center"}>
+                                <TriangleAlert className={"size-5"}/>
+                                <p className={"font-semibold"}>{loginError}</p>
+                            </div>
+                        )
+                    }
 
                     <Button onClick={handleEmailSignIn} disabled={emailPending}>
 
@@ -169,8 +196,6 @@ export default function SignInForm () {
 
                         Create a new account
                     </Button>
-
-
                 </div>
             </CardContent>
         </Card>

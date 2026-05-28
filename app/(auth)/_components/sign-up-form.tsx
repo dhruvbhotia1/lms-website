@@ -9,7 +9,7 @@ import {authClient} from "@/lib/auth-client";
 import {useState, useTransition} from "react";
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";
-import {Loader2Icon} from "lucide-react";
+import {Loader2Icon, TriangleAlert} from "lucide-react";
 
 
 export default function SignUpForm () {
@@ -29,6 +29,8 @@ export default function SignUpForm () {
 
     const [emailPending, emailTransition] = useTransition();
 
+    const [signUpError, setSignUpError] = useState("");
+
     const handleGithubSignUp = async () => {
 
         githubTransition(async () => {
@@ -38,6 +40,11 @@ export default function SignUpForm () {
             }, {
                 onSuccess: () => {
                     toast.success("Sign up successful!");
+
+                },
+                onError: (error) => {
+
+                    setSignUpError(error.error.message);
 
                 }
 
@@ -56,6 +63,11 @@ export default function SignUpForm () {
             }, {
                 onSuccess: () => {
                     toast.success("Sign up successful!")
+                },
+                onError: (error) => {
+
+                    setSignUpError(error.error.message);
+
                 }
             });
         })
@@ -81,6 +93,11 @@ export default function SignUpForm () {
                                     toast.success("Sign up successful!. Check your email for an OTP to verify it. ")
 
                                     router.push("/verify-request")
+                                },
+                                onError: (error) => {
+
+                                    setSignUpError(error.error.message);
+
                                 }
                             }
 
@@ -88,7 +105,7 @@ export default function SignUpForm () {
                     },
                     onError: (ctx) => {
                         router.push('/sign-up');
-                        console.log(ctx.error.message);
+                        setSignUpError(ctx.error.message);
                         toast.error("An error occurred while trying to create your account.");
                     }
                 }
@@ -172,6 +189,16 @@ export default function SignUpForm () {
                             <Input type={"password"} placeholder={"Enter your password"} value={password} onChange={(e) => setPassword(e.target.value)} disabled={emailPending}/>
                         </div>
                     </div>
+
+                    {
+                        !!signUpError && (
+
+                            <div className={"bg-destructive p-3 rounded-md flex items-center gap-x-2 text-sm  mb-4 text-white font-semibold justify-center"}>
+                                <TriangleAlert className={"size-5"}/>
+                                <p className={"font-semibold"}>{signUpError}</p>
+                            </div>
+                        )
+                    }
 
                     <Button onClick={handleEmailSignUp}>
                         {

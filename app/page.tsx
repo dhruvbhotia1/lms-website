@@ -1,10 +1,9 @@
 "use client"
 
-
-import {ThemeToggle} from "@/components/theme-toggle";
-import {Button} from "@/components/ui/button"
+import {Badge} from "@/components/ui/badge"
 import {authClient} from "@/lib/auth-client";
 import {useRouter} from "next/navigation";
+import Link from "next/link";
 
 export default function Home() {
 
@@ -20,15 +19,27 @@ export default function Home() {
 
   return (
     <>
-      <ThemeToggle/>
+      <section className={"relative py-20"}>
 
-      <div>
-        <Button onClick={() => handleSignOut()}>
+          <div className={"flex flex-col items-center text-center space-y-8"}>
+              <Badge variant={"outline"}>
+                  The Future of Online Education
+              </Badge>
+              <h1 className={"text-4xl md:text-6xl font-bold tracking-tight"}>Elevate your Learning Experience</h1>
+              <p className={"font-semibold max-w-175 md:text-xl text-muted-foreground"}>Discover a new way to learn with our modern, interactive learning management system. Access high-quality courses anytime, anywhere.</p>
 
-          Logout
+              <div className={"flex flex-col sm:flex-row gap-4 mt-8"}>
 
-        </Button>
-      </div>
+                  <Link href={"/"}>
+                      Explore Courses
+                  </Link>
+
+              </div>
+          </div>
+
+
+
+      </section>
     </>
 
   );
