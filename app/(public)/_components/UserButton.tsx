@@ -1,10 +1,8 @@
 import {
     BoltIcon,
-    BookOpenIcon,
     ChevronDownIcon,
-    LayoutDashboard,
     LogOutIcon,
-    MessageCircle,
+    MessageCircle, PenBoxIcon,
     PlusIcon,
 } from "lucide-react";
 
@@ -28,6 +26,7 @@ import {authClient} from "@/lib/auth-client";
 import Link from "next/link";
 import {toast} from "sonner";
 import {useRouter} from "next/navigation";
+import {FaTelegram} from "react-icons/fa";
 
 
 interface Props {
@@ -88,20 +87,22 @@ export function UserButton({user}: Props) {
                     <DropdownMenuItem asChild>
                         <Link href={'/user-setting'}>
                             <BoltIcon aria-hidden="true" className="opacity-60" size={16} />
-                            <span>User settings</span>
+                            <span>Settings</span>
                         </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                        <Link href={'/courses'}>
-                            <BookOpenIcon aria-hidden="true" className="opacity-60" size={16} />
-                            <span>Courses</span>
-                        </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                        <Link href={'/dashboard'}>
-                            <LayoutDashboard aria-hidden="true" className="opacity-60" size={16} />
-                            <span>Dashboard</span>
+                        <Link href={'/admin'}>
 
+                            {/*redirect to admin page check if the user has a admin profile, if not prompt them to make one , if yes let them access admin however the url will be changed to admin-admin or something to reduce the number of filter checks in middleware*/}
+
+                            <PenBoxIcon aria-hidden="true" className="opacity-60" size={16} />
+                            <span>Publish</span>
+                        </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                        <Link href={'/invite-friends'}>
+                            <FaTelegram aria-hidden="true" className="opacity-60" size={16} />
+                            <span>Invite friend</span>
                         </Link>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
@@ -109,6 +110,8 @@ export function UserButton({user}: Props) {
                 <DropdownMenuGroup>
                     <DropdownMenuItem asChild>
                        <Link href={'/conversation'}>
+
+                           {/*connect messaging app*/}
 
                            <MessageCircle aria-hidden="true" className="opacity-60" size={16} />
                            <span>Dms (NA yet)</span>

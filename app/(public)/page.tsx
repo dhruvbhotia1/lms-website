@@ -23,7 +23,7 @@ const features: FeatureProps[] = [{
     icon: "🎮"
 }, {
     title: "Progess tracking",
-    description: "Monitor your progress and achievements with detailed analytics and personalized dashboard",
+    description: "Monitor your progress and achievements with detailed analytics and personalized admin",
     icon: "📊"
 }, {
     title: "Community Support",
@@ -61,6 +61,8 @@ export default function Home() {
                     })}>
                         Explore Courses
                     </Link>
+
+                    {/*change this button so that it does some other function.*/}
 
                     <Link href={"/sign-in"} className={buttonVariants({
                         size: "lg",

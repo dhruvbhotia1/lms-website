@@ -17,13 +17,17 @@ const navigationItems = [{
     href: '/courses'
 }, {
     name: "Dashboard",
-    href: "/dashboard"
+    href: "/learner-dashboard"
 }]
 
 export function Navbar() {
 
 
+
+
+
     const {data: session, isPending} = authClient.useSession();
+    //navbar fetches the current session
 
 
     return (
