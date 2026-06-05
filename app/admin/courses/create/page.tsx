@@ -10,9 +10,9 @@ import {Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabe
 import {Controller} from "react-hook-form";
 import {Input} from "@/components/ui/input";
 import slugify from "slugify";
-import {InputGroup, InputGroupTextarea, InputGroupAddon, InputGroupText} from "@/components/ui/input-group";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {courseCategories} from "@/lib/zodSchema";
+import RichTextEditor from "@/components/rich-text-editor/Editor";
 
 export default function CourseCreatePage() {
 
@@ -30,6 +30,7 @@ export default function CourseCreatePage() {
             courseStatus: "Draft",
             slug: "",
             smallDescription: "",
+            thumbnail: ""
         }
     })
 
@@ -91,9 +92,7 @@ export default function CourseCreatePage() {
                                 <Controller name={"title"} control={form.control} render={({field, fieldState}) => (
                                     <Field data-invalid={fieldState.invalid} className={"space-y-3"}>
                                         <FieldLabel htmlFor={field.name}>
-
                                             Title
-
                                         </FieldLabel>
 
                                         <Input {...field} id={field.name} aria-invalid={fieldState.invalid} placeholder={"Title of the course will be..."}/>
@@ -101,7 +100,6 @@ export default function CourseCreatePage() {
                                         {fieldState.invalid && (
                                             <FieldError errors={[fieldState.error]} />
                                         )}
-
                                     </Field>
                                 )}/>
                             </FieldGroup>
@@ -119,18 +117,14 @@ export default function CourseCreatePage() {
                                             </FieldLabel>
 
                                             <Input {...field} id={field.name} aria-invalid={fieldState.invalid} placeholder={"Slug for the title"} value={field.value}/>
-
                                         </Field>
-
                                     )}/>
                                 </FieldGroup>
 
                                 <Button type={'button'} className={'w-fit'} onClick={generateSlug}>
-
                                     Generate slug
 
                                     <SparkleIcon className={"ml-1 size-5"}/>
-
                                 </Button>
                             </div>
 
@@ -139,9 +133,7 @@ export default function CourseCreatePage() {
                                 <Controller name={"fileKey"} control={form.control} render={({field, fieldState}) => (
                                     <Field data-invalid={fieldState.invalid} className={"space-y-3"}>
                                         <FieldLabel htmlFor={field.name}>
-
                                             File Key
-
                                         </FieldLabel>
 
                                         <Input {...field} id={field.name} aria-invalid={fieldState.invalid} placeholder={"Please enter the link to your course."}/>
@@ -149,7 +141,22 @@ export default function CourseCreatePage() {
                                         {fieldState.invalid && (
                                             <FieldError errors={[fieldState.error]} />
                                         )}
+                                    </Field>
+                                )}/>
+                            </FieldGroup>
 
+                            <FieldGroup>
+                                <Controller name={"thumbnail"} control={form.control} render={({field, fieldState}) => (
+                                    <Field data-invalid={fieldState.invalid} className={"space-y-3"}>
+                                        <FieldLabel htmlFor={field.name}>
+                                            Thumbnail
+                                        </FieldLabel>
+
+                                        <Input {...field} id={field.name} aria-invalid={fieldState.invalid} placeholder={"Please provide the url for the thumbnail of this course."}/>
+
+                                        {fieldState.invalid && (
+                                            <FieldError errors={[fieldState.error]} />
+                                        )}
                                     </Field>
                                 )}/>
                             </FieldGroup>
@@ -165,21 +172,11 @@ export default function CourseCreatePage() {
 
                                         </FieldLabel>
 
-                                        <InputGroup>
-                                            <InputGroupTextarea {...field} id={field.name} placeholder={"Write out a small description for your course."} rows={6} aria-invalid={fieldState.invalid}/>
-
-                                            <InputGroupAddon align="block-end">
-                                                <InputGroupText className="tabular-nums">
-                                                    {field.value.length}/250 characters
-                                                </InputGroupText>
-                                            </InputGroupAddon>
-
-                                        </InputGroup>
+                                        <RichTextEditor field={field}/>
 
                                         {fieldState.invalid && (
                                             <FieldError errors={[fieldState.error]} />
                                         )}
-
                                     </Field>
                                 )}/>
                             </FieldGroup>
@@ -192,21 +189,11 @@ export default function CourseCreatePage() {
                                             Description
                                         </FieldLabel>
 
-                                        <InputGroup>
-                                            <InputGroupTextarea {...field} id={field.name} placeholder={"Write out a detailed description for your course."} rows={6} aria-invalid={fieldState.invalid}/>
-
-                                            <InputGroupAddon align="block-end">
-                                                <InputGroupText className="tabular-nums">
-                                                    {field.value.length}/500 characters
-                                                </InputGroupText>
-                                            </InputGroupAddon>
-
-                                        </InputGroup>
+                                        <RichTextEditor field={field}/>
 
                                         {fieldState.invalid && (
                                             <FieldError errors={[fieldState.error]} />
                                         )}
-
                                     </Field>
                                 )}/>
                             </FieldGroup>

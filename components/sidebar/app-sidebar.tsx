@@ -170,7 +170,7 @@ export function AppSidebar({ user, ...props }: Props) {
               asChild
               className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
-              <Link href="/public">
+              <Link href="/">
                 <Image src={'/logo.svg'} alt={'logo'} width={32} height={32} className="size-5!" />
                 <span className="text-base font-semibold">LearnersHub</span>
               </Link>

@@ -73,7 +73,7 @@ export function UserButton({user}: Props) {
                     />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="max-w-64">
+            <DropdownMenuContent className="min-w-48 gap-y-4">
                 <DropdownMenuLabel className="flex min-w-0 flex-col">
           <span className="truncate font-medium text-foreground text-sm">
             {user.name}

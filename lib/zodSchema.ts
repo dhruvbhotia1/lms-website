@@ -19,7 +19,8 @@ export const courseSchema = z.object({
     category: z.enum(courseCategories, {message: "Category is required"}),
     smallDescription: z.string().min(100, {message: "Small description should be at least 100 characters long."}).max(250, {message: "Small description must not exceed 500 character length."}),
     courseStatus: z.enum(courseStatus),
-    slug: z.string().min(1)
+    slug: z.string().min(1),
+    thumbnail: z.string().min(1),
 
 })
 
