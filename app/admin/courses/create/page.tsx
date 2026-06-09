@@ -13,6 +13,7 @@ import slugify from "slugify";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {courseCategories} from "@/lib/zodSchema";
 import RichTextEditor from "@/components/rich-text-editor/Editor";
+import {Uploader} from "@/components/file-uploader/Uploader";
 
 export default function CourseCreatePage() {
 
@@ -152,7 +153,9 @@ export default function CourseCreatePage() {
                                             Thumbnail
                                         </FieldLabel>
 
-                                        <Input {...field} id={field.name} aria-invalid={fieldState.invalid} placeholder={"Please provide the url for the thumbnail of this course."}/>
+                                        <Uploader/>
+
+                                        {/*<Input {...field} id={field.name} aria-invalid={fieldState.invalid} placeholder={"Please provide the url for the thumbnail of this course."}/>*/}
 
                                         {fieldState.invalid && (
                                             <FieldError errors={[fieldState.error]} />
