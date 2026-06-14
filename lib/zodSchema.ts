@@ -1,28 +1,47 @@
-import {z} from 'zod'
+import { z } from "zod";
 
-export const courseLevel = ['Beginner', 'Intermediate', 'Advanced'] as const
+export const courseLevel = ["Beginner", "Intermediate", "Advanced"] as const;
 
-export const courseStatus = ['Draft', 'Published', 'Archived'] as const
+export const courseStatus = ["Draft", "Public", "Archive"] as const;
 
 export const courseCategories = [
-    "Development", "Business", "Finance", "IT & Software", "Office Productivity", "Personal Development", "Design", "Marketing", "Health & Fitness", "Music", "Teaching & Academics", "Other"
-] as const
+  "Development",
+  "Business",
+  "Finance",
+  "IT & Software",
+  "Office Productivity",
+  "Personal Development",
+  "Design",
+  "Marketing",
+  "Health & Fitness",
+  "Music",
+  "Teaching & Academics",
+  "Other",
+] as const;
 
 export const courseSchema = z.object({
+  title: z
+    .string()
+    .min(3, { message: "Title should be at least 3 characters long." })
+    .max(100, { message: "Title should not be longer than 100 characters" }),
+  description: z
+    .string()
+    .min(3, { message: "Description should be at least 3 characters long." }),
+  fileKey: z.string().min(1, { message: "File Key should be at least 3 characters long." }),
+  price: z.number().min(1, { message: "Price should be larger than 1 USD." }),
+  duration: z
+    .number()
+    .min(1, { message: "Duration should be at least 1 hour." })
+    .max(500, { message: "Duration must not exceed 500 hours." }),
+  level: z.enum(courseLevel, { message: "Level is required." }),
+  category: z.enum(courseCategories, { message: "Category is required" }),
+  smallDescription: z
+    .string()
+    .min(100, { message: "Small description should be at least 100 characters long." })
+    .max(250, { message: "Small description must not exceed 500 character length." }),
+  status: z.enum(courseStatus),
+  slug: z.string().min(1),
+  thumbnail: z.string().min(1),
+});
 
-    title: z.string().min(3, {message: "Title should be at least 3 characters long."}).max(100, {message: "Title should not be longer than 100 characters"}),
-    description: z.string().min(3, {message: "Description should be at least 3 characters long."}),
-    fileKey: z.string().min(1, {message: "File Key should be at least 3 characters long."}),
-    price: z.number().min(1, {message: "Price should be larger than 1 USD."}),
-    duration: z.number().min(1, {message: "Duration should be at least 1 hour."}).max(500, {message: "Duration must not exceed 500 hours."}),
-    level: z.enum(courseLevel, {message: "Level is required."}),
-    category: z.enum(courseCategories, {message: "Category is required"}),
-    smallDescription: z.string().min(100, {message: "Small description should be at least 100 characters long."}).max(250, {message: "Small description must not exceed 500 character length."}),
-    courseStatus: z.enum(courseStatus),
-    slug: z.string().min(1),
-    thumbnail: z.string().min(1),
-
-})
-
-
-export type CourseSchemaType = z.infer<typeof courseSchema>
+export type CourseSchemaType = z.infer<typeof courseSchema>;

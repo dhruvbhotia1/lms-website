@@ -1,10 +1,13 @@
 import { z } from "zod";
 import { NextResponse } from "next/server";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { v4 as uuidv4 } from "uuid";
 
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3 } from "@/lib/S3Client";
+import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 export const fileUploadSchema = z.object({
   fileName: z.string().min(1, { message: "File name is required." }),
@@ -13,16 +16,42 @@ export const fileUploadSchema = z.object({
   isImage: z.boolean(),
 });
 
+const aj = arcjet
+  .withRule(
+    detectBot({
+      mode: "LIVE",
+      allow: [],
+    }),
+  )
+  .withRule(
+    fixedWindow({
+      mode: "LIVE",
+      window: "1m",
+      max: 5,
+    }),
+  );
+
 export async function POST(request: Request) {
+  const currentUser = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!currentUser) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
+    const decision = await aj.protect(request, { fingerprint: currentUser!.user.id });
+
+    if (decision.isDenied()) {
+      return NextResponse.json({ error: "Decision denied by Arcjet" }, { status: 401 });
+    }
+
     const body = await request.json();
     const validation = fileUploadSchema.safeParse(body);
 
     if (!validation.success) {
-      return NextResponse.json(
-        { error: "Invalid Request Body" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Invalid Request Body" }, { status: 400 });
     }
 
     const { fileName, contentType, size } = validation.data;
@@ -48,9 +77,6 @@ export async function POST(request: Request) {
     return NextResponse.json(response);
   } catch (error) {
     console.log("this is the error", error);
-    return NextResponse.json(
-      { error: "Failed to generate presigned URL" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Failed to generate presigned URL" }, { status: 500 });
   }
 }
