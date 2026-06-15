@@ -3,8 +3,7 @@ import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
 import arcjet from "@/lib/arcjet";
 import { detectBot, fixedWindow } from "@/lib/arcjet";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { requireAdmin } from "@/app/data/admin/require-admin";
 
 const aj = arcjet
   .withRule(
@@ -22,16 +21,10 @@ const aj = arcjet
   );
 
 export async function DELETE(request: Request) {
-  const currentUser = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!currentUser) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const session = await requireAdmin();
 
   try {
-    const decision = await aj.protect(request, { fingerprint: currentUser!.user.id });
+    const decision = await aj.protect(request, { fingerprint: session!.user.id });
 
     if (decision.isDenied()) {
       return NextResponse.json({ error: "Decision denied by Arcjet" }, { status: 401 });

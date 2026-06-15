@@ -3,23 +3,58 @@
 import { courseSchema, CourseSchemaType } from "./zodSchema";
 import { prisma } from "@/lib/prisma";
 import { ApiResponse } from "./types";
-import { auth } from "./auth";
-import { headers } from "next/headers";
+import { requireAdmin } from "@/app/data/admin/require-admin";
+import arcjet from "./arcjet";
+import { detectBot, fixedWindow } from "./arcjet";
+import { request } from "@arcjet/next";
+
+const aj = arcjet
+  .withRule(
+    detectBot({
+      mode: "LIVE",
+      allow: [],
+    }),
+  )
+  .withRule(
+    fixedWindow({
+      mode: "LIVE",
+      window: "1m",
+      max: 5,
+    }),
+  );
 
 export async function createCourse(values: CourseSchemaType): Promise<ApiResponse> {
+  const session = await requireAdmin();
+
   try {
-    const validation = courseSchema.safeParse(values);
+    const decision = await aj.protect(await request(), { fingerprint: session?.user.id }); // rate limiting for creating courses (form submissions).
 
-    const currentUser = await auth.api.getSession({
-      headers: await headers(),
-    });
-
-    if (!currentUser) {
+    if (decision.isDenied()) {
       return {
         status: "error",
-        message: "You must be logged in to create a course.",
+        message: "You are a bot or have exceeded the rate limit.",
       };
     }
+
+    const validation = courseSchema.safeParse(values);
+
+    if (!session) {
+      return {
+        status: "error",
+        message: "You must be logged in and have admin privileges to create a course.",
+      };
+    }
+
+    // const currentUser = await auth.api.getSession({
+    //   headers: await headers(),
+    // });
+
+    // if (!currentUser) {
+    //   return {
+    //     status: "error",
+    //     message: "You must be logged in to create a course.",
+    //   };
+    // } commented out this validation because now we can use the session from the requireAdmin function
 
     if (!validation.success) {
       return {
@@ -31,7 +66,7 @@ export async function createCourse(values: CourseSchemaType): Promise<ApiRespons
     await prisma.course.create({
       data: {
         ...validation.data,
-        userId: currentUser!.user.id,
+        userId: session!.user.id,
       },
     });
 
