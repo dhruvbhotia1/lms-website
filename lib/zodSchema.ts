@@ -27,7 +27,9 @@ export const courseSchema = z.object({
   description: z
     .string()
     .min(3, { message: "Description should be at least 3 characters long." }),
-  fileKey: z.string().min(1, { message: "File Key should be at least 3 characters long." }),
+  fileKey: z
+    .string()
+    .min(1, { message: "File Key should be at least 3 characters long." }),
   price: z.number().min(1, { message: "Price should be larger than 1 USD." }),
   duration: z
     .number()
@@ -37,8 +39,12 @@ export const courseSchema = z.object({
   category: z.enum(courseCategories, { message: "Category is required" }),
   smallDescription: z
     .string()
-    .min(100, { message: "Small description should be at least 100 characters long." })
-    .max(250, { message: "Small description must not exceed 500 character length." }),
+    .min(10, {
+      message: "Small description should be at least 100 characters long.",
+    })
+    .max(250, {
+      message: "Small description must not exceed 500 character length.",
+    }),
   status: z.enum(courseStatus),
   slug: z.string().min(1),
   thumbnail: z.string().min(1),

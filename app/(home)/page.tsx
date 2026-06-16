@@ -1,8 +1,6 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -16,7 +14,8 @@ interface FeatureProps {
 const features: FeatureProps[] = [
   {
     title: "Comprehensive Courses",
-    description: "Access a wide range of curated courses designed by industry experts",
+    description:
+      "Access a wide range of curated courses designed by industry experts",
     icon: "📚",
   },
   {
@@ -48,9 +47,13 @@ export default function Home() {
           <h1 className={"text-4xl md:text-6xl font-bold tracking-tight"}>
             Elevate your Learning Experience
           </h1>
-          <p className={"font-semibold max-w-175 md:text-xl text-muted-foreground"}>
-            Discover a new way to learn with our modern, interactive learning management
-            system. Access high-quality courses anytime, anywhere.
+          <p
+            className={
+              "font-semibold max-w-175 md:text-xl text-muted-foreground"
+            }
+          >
+            Discover a new way to learn with our modern, interactive learning
+            management system. Access high-quality courses anytime, anywhere.
           </p>
 
           <div className={"flex flex-col sm:flex-row gap-4 mt-8"}>
@@ -78,7 +81,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"}>
+      <section
+        className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"}
+      >
         {features.map((feature, index) => (
           <Card key={index} className={"hover:shadow-lg transition-shadow"}>
             <CardHeader>

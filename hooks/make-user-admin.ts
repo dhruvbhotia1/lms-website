@@ -4,14 +4,15 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
+import { ApiResponse } from "@/lib/types";
 
-export const makeUserAdmin = async (email: string) => {
+export const makeUserAdmin = async (email: string): Promise<ApiResponse> => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   if (!session) {
-    throw new Error("Unauthorized");
+    return { status: "error", message: "Unauthorized. User Not Logged In." };
   }
 
   if (session.user.role === "admin") {
@@ -19,7 +20,7 @@ export const makeUserAdmin = async (email: string) => {
   }
 
   if (email !== session.user.email) {
-    throw new Error("Unauthorized");
+    return { status: "error", message: "Unauthorized. Email does not match." };
   }
 
   await prisma.user.update({

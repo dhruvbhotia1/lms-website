@@ -10,7 +10,12 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
-import { courseLevel, courseSchema, CourseSchemaType, courseStatus } from "@/lib/zodSchema";
+import {
+  courseLevel,
+  courseSchema,
+  CourseSchemaType,
+  courseStatus,
+} from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Field,
@@ -59,6 +64,8 @@ export default function CourseCreatePage() {
     },
   });
 
+  //form submit function
+
   const onSubmit = async (values: CourseSchemaType) => {
     startCreatTransition(async () => {
       try {
@@ -76,6 +83,8 @@ export default function CourseCreatePage() {
       }
     });
   };
+
+  //fucntion to generate slug from the name of the course
 
   const generateSlug = () => {
     const titleValue = form.getValues("title");
@@ -109,18 +118,26 @@ export default function CourseCreatePage() {
         <CardHeader className={"space-y-2"}>
           <CardTitle>Basic Information</CardTitle>
 
-          <CardDescription>Provide basic information about the course.</CardDescription>
+          <CardDescription>
+            Provide basic information about the course.
+          </CardDescription>
         </CardHeader>
 
         <CardContent>
-          <form id={"course-create-form"} onSubmit={form.handleSubmit(onSubmit)}>
+          <form
+            id={"course-create-form"}
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
             <div className="flex flex-col gap-7">
               <FieldGroup>
                 <Controller
                   name={"title"}
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid} className={"space-y-3"}>
+                    <Field
+                      data-invalid={fieldState.invalid}
+                      className={"space-y-3"}
+                    >
                       <FieldLabel htmlFor={field.name}>Title</FieldLabel>
 
                       <Input
@@ -130,7 +147,9 @@ export default function CourseCreatePage() {
                         placeholder={"Title of the course will be..."}
                       />
 
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
                     </Field>
                   )}
                 />
@@ -142,7 +161,10 @@ export default function CourseCreatePage() {
                     name={"slug"}
                     control={form.control}
                     render={({ field, fieldState }) => (
-                      <Field data-invalid={fieldState.invalid} className={"space-y-3"}>
+                      <Field
+                        data-invalid={fieldState.invalid}
+                        className={"space-y-3"}
+                      >
                         <FieldLabel htmlFor={field.name}>Slug</FieldLabel>
 
                         <Input
@@ -157,7 +179,11 @@ export default function CourseCreatePage() {
                   />
                 </FieldGroup>
 
-                <Button type={"button"} className={"w-fit"} onClick={generateSlug}>
+                <Button
+                  type={"button"}
+                  className={"w-fit"}
+                  onClick={generateSlug}
+                >
                   Generate slug
                   <SparkleIcon className={"ml-1 size-5"} />
                 </Button>
@@ -168,7 +194,10 @@ export default function CourseCreatePage() {
                   name={"fileKey"}
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid} className={"space-y-3"}>
+                    <Field
+                      data-invalid={fieldState.invalid}
+                      className={"space-y-3"}
+                    >
                       <FieldLabel htmlFor={field.name}>File Key</FieldLabel>
 
                       <Input
@@ -178,7 +207,9 @@ export default function CourseCreatePage() {
                         placeholder={"Please enter the link to your course."}
                       />
 
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
                     </Field>
                   )}
                 />
@@ -189,14 +220,19 @@ export default function CourseCreatePage() {
                   name={"thumbnail"}
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid} className={"space-y-3"}>
+                    <Field
+                      data-invalid={fieldState.invalid}
+                      className={"space-y-3"}
+                    >
                       <FieldLabel htmlFor={field.name}>Thumbnail</FieldLabel>
 
                       <Uploader onChange={field.onChange} value={field.value} />
 
                       {/*<Input {...field} id={field.name} aria-invalid={fieldState.invalid} placeholder={"Please provide the url for the thumbnail of this course."}/>*/}
 
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
                     </Field>
                   )}
                 />
@@ -209,12 +245,19 @@ export default function CourseCreatePage() {
                   name={"smallDescription"}
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid} className={"space-y-3"}>
-                      <FieldLabel htmlFor={field.name}>Small Description</FieldLabel>
+                    <Field
+                      data-invalid={fieldState.invalid}
+                      className={"space-y-3"}
+                    >
+                      <FieldLabel htmlFor={field.name}>
+                        Small Description
+                      </FieldLabel>
 
                       <RichTextEditor field={field} />
 
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
                     </Field>
                   )}
                 />
@@ -225,12 +268,17 @@ export default function CourseCreatePage() {
                   name={"description"}
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid} className={"space-y-3"}>
+                    <Field
+                      data-invalid={fieldState.invalid}
+                      className={"space-y-3"}
+                    >
                       <FieldLabel htmlFor={field.name}>Description</FieldLabel>
 
                       <RichTextEditor field={field} />
 
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
                     </Field>
                   )}
                 />
@@ -241,15 +289,21 @@ export default function CourseCreatePage() {
                   name={"category"}
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field orientation={"responsive"} data-invalid={fieldState.invalid}>
+                    <Field
+                      orientation={"responsive"}
+                      data-invalid={fieldState.invalid}
+                    >
                       <FieldContent className={"gap-y-3"}>
                         <FieldLabel htmlFor={field.name}>Category</FieldLabel>
 
                         <FieldDescription>
-                          Select a category of field of academia this course is built around.
+                          Select a category of field of academia this course is
+                          built around.
                         </FieldDescription>
 
-                        {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                        {fieldState.invalid && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
                       </FieldContent>
 
                       <Select
@@ -257,7 +311,10 @@ export default function CourseCreatePage() {
                         value={field.value}
                         onValueChange={field.onChange}
                       >
-                        <SelectTrigger id={field.name} aria-invalid={fieldState.invalid}>
+                        <SelectTrigger
+                          id={field.name}
+                          aria-invalid={fieldState.invalid}
+                        >
                           <SelectValue placeholder={"Select"} />
                         </SelectTrigger>
 
@@ -279,7 +336,10 @@ export default function CourseCreatePage() {
                   name={"level"}
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field orientation={"responsive"} data-invalid={fieldState.invalid}>
+                    <Field
+                      orientation={"responsive"}
+                      data-invalid={fieldState.invalid}
+                    >
                       <FieldContent className={"gap-y-3"}>
                         <FieldLabel htmlFor={field.name}>Level</FieldLabel>
 
@@ -287,7 +347,9 @@ export default function CourseCreatePage() {
                           Select a level of knowledge this course contains
                         </FieldDescription>
 
-                        {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                        {fieldState.invalid && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
                       </FieldContent>
 
                       <Select
@@ -295,7 +357,10 @@ export default function CourseCreatePage() {
                         value={field.value}
                         onValueChange={field.onChange}
                       >
-                        <SelectTrigger id={field.name} aria-invalid={fieldState.invalid}>
+                        <SelectTrigger
+                          id={field.name}
+                          aria-invalid={fieldState.invalid}
+                        >
                           <SelectValue placeholder={"Select"} />
                         </SelectTrigger>
 
@@ -321,18 +386,26 @@ export default function CourseCreatePage() {
                       data-invalid={fieldState.invalid}
                       className={"flex flex-row space-y-3"}
                     >
-                      <FieldLabel htmlFor={field.name}>Duration (hours)</FieldLabel>
+                      <FieldLabel htmlFor={field.name}>
+                        Duration (hours)
+                      </FieldLabel>
 
                       <Input
                         {...field}
                         id={field.name}
                         aria-invalid={fieldState.invalid}
-                        placeholder={"Please enter the duration of this course."}
+                        placeholder={
+                          "Please enter the duration of this course."
+                        }
                         type={"number"}
-                        onChange={(e) => field.onChange(e.target.valueAsNumber || 0)}
+                        onChange={(e) =>
+                          field.onChange(e.target.valueAsNumber || 0)
+                        }
                       />
 
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
                     </Field>
                   )}
                 />
@@ -353,12 +426,18 @@ export default function CourseCreatePage() {
                         {...field}
                         id={field.name}
                         aria-invalid={fieldState.invalid}
-                        placeholder={"Please enter the cost to access this course in USD."}
+                        placeholder={
+                          "Please enter the cost to access this course in USD."
+                        }
                         type={"number"}
-                        onChange={(e) => field.onChange(e.target.valueAsNumber || 0)}
+                        onChange={(e) =>
+                          field.onChange(e.target.valueAsNumber || 0)
+                        }
                       />
 
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
                     </Field>
                   )}
                 />
@@ -369,7 +448,10 @@ export default function CourseCreatePage() {
                   name={"status"}
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field orientation={"responsive"} data-invalid={fieldState.invalid}>
+                    <Field
+                      orientation={"responsive"}
+                      data-invalid={fieldState.invalid}
+                    >
                       <FieldContent className={"gap-y-3"}>
                         <FieldLabel htmlFor={field.name}>Status</FieldLabel>
 
@@ -377,7 +459,9 @@ export default function CourseCreatePage() {
                           Select the current status of this course.
                         </FieldDescription>
 
-                        {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                        {fieldState.invalid && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
                       </FieldContent>
 
                       <Select
@@ -385,7 +469,10 @@ export default function CourseCreatePage() {
                         value={field.value}
                         onValueChange={field.onChange}
                       >
-                        <SelectTrigger id={field.name} aria-invalid={fieldState.invalid}>
+                        <SelectTrigger
+                          id={field.name}
+                          aria-invalid={fieldState.invalid}
+                        >
                           <SelectValue placeholder={"Select"} />
                         </SelectTrigger>
 

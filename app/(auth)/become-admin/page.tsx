@@ -22,7 +22,13 @@ export default function BecomeAdmin() {
 
     try {
       startAdminTransition(async () => {
-        await makeUserAdmin(email);
+        const result = await makeUserAdmin(email);
+
+        if (result.status === "error") {
+          toast.error(result.message);
+        } else {
+          toast.success("You are now an admin!");
+        }
       });
     } catch (error: any) {
       toast.error(error.message);
@@ -33,7 +39,9 @@ export default function BecomeAdmin() {
     <Card className={"gap-y-6"}>
       <CardHeader>
         <CardTitle className={"text-xl"}>Welcome</CardTitle>
-        <CardDescription>You can sign up to be become an admin here.</CardDescription>
+        <CardDescription>
+          You can sign up to be become an admin here.
+        </CardDescription>
       </CardHeader>
 
       <CardContent className="flex flex-col gap-y-6">

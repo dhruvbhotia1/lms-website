@@ -23,11 +23,15 @@ const aj = arcjet
     }),
   );
 
-export async function createCourse(values: CourseSchemaType): Promise<ApiResponse> {
-  const session = await requireAdmin();
+export async function createCourse(
+  values: CourseSchemaType,
+): Promise<ApiResponse> {
+  const session = await requireAdmin(); //checks for logged in user and admin roles presence.
 
   try {
-    const decision = await aj.protect(await request(), { fingerprint: session?.user.id }); // rate limiting for creating courses (form submissions).
+    const decision = await aj.protect(await request(), {
+      fingerprint: session?.user.id,
+    }); // rate limiting for creating courses (form submissions).
 
     if (decision.isDenied()) {
       return {
@@ -41,7 +45,8 @@ export async function createCourse(values: CourseSchemaType): Promise<ApiRespons
     if (!session) {
       return {
         status: "error",
-        message: "You must be logged in and have admin privileges to create a course.",
+        message:
+          "You must be logged in and have admin privileges to create a course.",
       };
     }
 
