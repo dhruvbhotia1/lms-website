@@ -2,7 +2,7 @@ import { AdminCourseType } from "@/app/data/admin/admin-get-courses";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-import { School, TimerIcon } from "lucide-react";
+import { School, TimerIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaDollarSign, FaPen } from "react-icons/fa6";
@@ -20,6 +20,16 @@ export function AdminCourseCard({ data }: Props) {
 
   return (
     <Card className="group relative">
+      <div className="absolute top-2 right-2">
+        <Link
+          href={`/admin/courses/${data.id}/delete`}
+          className={buttonVariants({ variant: "destructive" })}
+        >
+          <TrashIcon className="size-4" />
+          Delete
+        </Link>
+      </div>
+
       <Image
         src={`${process.env.NEXT_PUBLIC_S3_BUCKET_DEVELOPMENT_URL}/${data.thumbnail}`}
         height={400}
@@ -65,8 +75,8 @@ export function AdminCourseCard({ data }: Props) {
               className: "flex items-center gap-3 font-semibold",
             })}
           >
-            Edit
             <FaPen className="size-4" />
+            Edit
           </Link>
         </div>
       </CardContent>

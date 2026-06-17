@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { ApiResponse } from "@/lib/types";
@@ -16,7 +15,10 @@ export const makeUserAdmin = async (email: string): Promise<ApiResponse> => {
   }
 
   if (session.user.role === "admin") {
-    return redirect("/admin");
+    return {
+      status: "error",
+      message: "Unauthorized. User is already an admin.",
+    };
   }
 
   if (email !== session.user.email) {
@@ -32,5 +34,8 @@ export const makeUserAdmin = async (email: string): Promise<ApiResponse> => {
     },
   });
 
-  return redirect("/admin");
+  return {
+    status: "success",
+    message: "User promoted to admin successfully",
+  };
 };

@@ -11,11 +11,14 @@ import { Input } from "@/components/ui/input";
 import { useState, useTransition } from "react";
 import { makeUserAdmin } from "@/hooks/make-user-admin";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function BecomeAdmin() {
   const [email, setEmail] = useState("");
 
   const [pendingTransition, startAdminTransition] = useTransition();
+
+  const router = useRouter();
 
   const becomeAdmin = (email: string) => {
     if (!email) return;
@@ -29,9 +32,11 @@ export default function BecomeAdmin() {
         } else {
           toast.success("You are now an admin!");
         }
+
+        router.push("/admin");
       });
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : String(error));
     }
   };
 
@@ -39,9 +44,7 @@ export default function BecomeAdmin() {
     <Card className={"gap-y-6"}>
       <CardHeader>
         <CardTitle className={"text-xl"}>Welcome</CardTitle>
-        <CardDescription>
-          You can sign up to be become an admin here.
-        </CardDescription>
+        <CardDescription>You can sign up to be become an admin here.</CardDescription>
       </CardHeader>
 
       <CardContent className="flex flex-col gap-y-6">
