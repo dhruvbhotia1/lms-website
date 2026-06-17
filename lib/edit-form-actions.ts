@@ -22,7 +22,7 @@ export async function editCourse({ values, courseId }: Props): Promise<ApiRespon
       };
     }
 
-    await prisma.course.update({
+    const result = await prisma.course.update({
       where: {
         id: courseId,
         userId: session.user.id,
@@ -31,6 +31,13 @@ export async function editCourse({ values, courseId }: Props): Promise<ApiRespon
         ...validation.data,
       },
     });
+
+    if (!result) {
+      return {
+        status: "error",
+        message: "Failed to update course.",
+      };
+    }
 
     return {
       status: "success",

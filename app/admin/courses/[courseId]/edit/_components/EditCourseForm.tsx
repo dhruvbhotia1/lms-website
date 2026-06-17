@@ -35,7 +35,7 @@ import type { AdminGetCourseType } from "@/app/data/admin/admin-get-course";
 import slugify from "slugify";
 
 interface EditFormCourseProps {
-  course: Omit<AdminGetCourseType, "userId">; //we should not send the userId on the frontend, this could be a security risk.
+  course: Omit<AdminGetCourseType, "userId">; //we should not send the userId on the frontend, this could be a security risk
 }
 
 export function EditFormCourse({ course }: EditFormCourseProps) {
@@ -62,6 +62,21 @@ export function EditFormCourse({ course }: EditFormCourseProps) {
   };
 
   const onSubmit = async (values: CourseSchemaType) => {
+    //before updating, delete the old thumbnail...
+
+    const deleteResult = await fetch("/api/s3/delete", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ key: course.thumbnail }),
+    });
+
+    if (!deleteResult.ok) {
+      toast.error("Failed to delete file from S3.");
+      return;
+    }
+
     startCreatTransition(async () => {
       try {
         const result = await editCourse({ values, courseId });
