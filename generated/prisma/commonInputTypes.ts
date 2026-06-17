@@ -179,6 +179,13 @@ export type EnumCourseLevelFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumCourseLevelFilter<$PrismaModel> | $Enums.CourseLevel
 }
 
+export type EnumCourseCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourseCategory | Prisma.EnumCourseCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.CourseCategory[] | Prisma.ListEnumCourseCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourseCategory[] | Prisma.ListEnumCourseCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourseCategoryFilter<$PrismaModel> | $Enums.CourseCategory
+}
+
 export type EnumCourseStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.CourseStatus | Prisma.EnumCourseStatusFieldRefInput<$PrismaModel>
   in?: $Enums.CourseStatus[] | Prisma.ListEnumCourseStatusFieldRefInput<$PrismaModel>
@@ -210,6 +217,16 @@ export type EnumCourseLevelWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCourseLevelFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCourseLevelFilter<$PrismaModel>
+}
+
+export type EnumCourseCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourseCategory | Prisma.EnumCourseCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.CourseCategory[] | Prisma.ListEnumCourseCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourseCategory[] | Prisma.ListEnumCourseCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourseCategoryWithAggregatesFilter<$PrismaModel> | $Enums.CourseCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCourseCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCourseCategoryFilter<$PrismaModel>
 }
 
 export type EnumCourseStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -389,6 +406,13 @@ export type NestedEnumCourseLevelFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumCourseLevelFilter<$PrismaModel> | $Enums.CourseLevel
 }
 
+export type NestedEnumCourseCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourseCategory | Prisma.EnumCourseCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.CourseCategory[] | Prisma.ListEnumCourseCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourseCategory[] | Prisma.ListEnumCourseCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourseCategoryFilter<$PrismaModel> | $Enums.CourseCategory
+}
+
 export type NestedEnumCourseStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.CourseStatus | Prisma.EnumCourseStatusFieldRefInput<$PrismaModel>
   in?: $Enums.CourseStatus[] | Prisma.ListEnumCourseStatusFieldRefInput<$PrismaModel>
@@ -431,6 +455,16 @@ export type NestedEnumCourseLevelWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCourseLevelFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCourseLevelFilter<$PrismaModel>
+}
+
+export type NestedEnumCourseCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourseCategory | Prisma.EnumCourseCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.CourseCategory[] | Prisma.ListEnumCourseCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourseCategory[] | Prisma.ListEnumCourseCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourseCategoryWithAggregatesFilter<$PrismaModel> | $Enums.CourseCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCourseCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCourseCategoryFilter<$PrismaModel>
 }
 
 export type NestedEnumCourseStatusWithAggregatesFilter<$PrismaModel = never> = {

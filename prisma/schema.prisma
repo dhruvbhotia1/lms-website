@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -79,21 +78,21 @@ model Verification {
 }
 
 model Course {
-  id               String       @id @default(uuid())
-  createdAt        DateTime     @default(now())
-  updatedAt        DateTime     @updatedAt
+  id               String         @id @default(uuid())
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
   userId           String
-  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   title            String
   description      String
   fileKey          String
   price            Int
   duration         Int
-  level            CourseLevel  @default(Beginner)
-  category         String
+  level            CourseLevel    @default(Beginner)
+  category         CourseCategory @default(Other)
   smallDescription String
-  slug             String       @unique
-  status           CourseStatus @default(Draft)
+  slug             String         @unique
+  status           CourseStatus   @default(Draft)
   thumbnail        String
 
   @@index([userId])
@@ -110,4 +109,19 @@ enum CourseStatus {
   Draft
   Public
   Archive
+}
+
+enum CourseCategory {
+  Development
+  Business
+  Finance
+  IT_and_Software        @map("IT and Software")
+  Office_Productivity    @map("Office Productivity")
+  Personal_Development   @map("Personal Development")
+  Design
+  Marketing
+  Health_and_Fitness     @map("Health and Fitness")
+  Music
+  Teaching_and_Academics @map("Teaching and Academics")
+  Other
 }

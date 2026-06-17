@@ -995,6 +995,20 @@ export type ListEnumCourseLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'CourseCategory'
+ */
+export type EnumCourseCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CourseCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'CourseCategory[]'
+ */
+export type ListEnumCourseCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CourseCategory[]'>
+    
+
+
+/**
  * Reference to a field of type 'CourseStatus'
  */
 export type EnumCourseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CourseStatus'>

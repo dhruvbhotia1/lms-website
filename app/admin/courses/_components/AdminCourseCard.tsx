@@ -1,13 +1,8 @@
 import { AdminCourseType } from "@/app/data/admin/admin-get-courses";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { MoreVertical, PenIcon, School, TimerIcon } from "lucide-react";
+
+import { School, TimerIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaDollarSign, FaPen } from "react-icons/fa6";
@@ -49,9 +44,7 @@ export function AdminCourseCard({ data }: Props) {
           <div className="mt-4 flex items-center gap-x-5">
             <div className="flex gap-2 items-center">
               <TimerIcon className="size-6 p-1 rounded-md text-primary bg-primary/10" />
-              <p className="text-sm text-muted-foreground">
-                {data.duration} Hours
-              </p>
+              <p className="text-sm text-muted-foreground">{data.duration} Hours</p>
             </div>
 
             <div className="flex gap-2 items-center">

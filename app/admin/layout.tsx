@@ -11,6 +11,8 @@ interface Props {
 export default async function AdminLayout({ children }: Props) {
   const session = await requireAdmin();
 
+  //extra check
+
   if (!session) {
     return redirect("/not-admin");
   }

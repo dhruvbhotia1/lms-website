@@ -9,8 +9,6 @@ export async function requireAdmin() {
     headers: await headers(),
   });
 
-  console.log(session?.user.role);
-
   if (!session) {
     return redirect("/login");
   }
