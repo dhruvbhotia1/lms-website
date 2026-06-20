@@ -19,7 +19,7 @@ export function AdminCourseCard({ data }: Props) {
   const plainTextDescription = stripHtml(data.smallDescription || "");
 
   return (
-    <Card className="group relative">
+    <Card className="group relative p-0 overflow-hidden">
       <div className="absolute top-2 right-2">
         <Link
           href={`/admin/courses/${data.id}/delete`}

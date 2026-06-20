@@ -42,3 +42,13 @@ export type Verification = Prisma.VerificationModel
  * 
  */
 export type Course = Prisma.CourseModel
+/**
+ * Model Chapter
+ * 
+ */
+export type Chapter = Prisma.ChapterModel
+/**
+ * Model Lesson
+ * 
+ */
+export type Lesson = Prisma.LessonModel

@@ -2,14 +2,14 @@
 import { requireAdmin } from "@/app/data/admin/require-admin";
 import { prisma } from "@/lib/prisma";
 import { ApiResponse } from "@/lib/types";
+import { deleteThumbnail } from "./delete-thumbnail";
 
-export const deleteCourse = async ({
-  courseId,
-  userEmail,
-}: {
+interface Props {
   courseId: string;
   userEmail: string;
-}): Promise<ApiResponse> => {
+}
+
+export const deleteCourse = async ({ courseId, userEmail }: Props): Promise<ApiResponse> => {
   const session = await requireAdmin(); // authenticate before calling this api.
 
   if (!session) {
@@ -19,30 +19,31 @@ export const deleteCourse = async ({
     };
   }
 
-  if (session.user.email !== userEmail) {
-    //the logged in user is not the owner of the course
+  if (session.user.email === userEmail) {
+    const deleteResult = await deleteThumbnail({ courseId });
+
+    if (deleteResult.status === "error") {
+      return {
+        status: "error",
+        message: deleteResult.message,
+      };
+    }
+
+    await prisma.course.deleteMany({
+      where: {
+        id: courseId,
+        userId: session.user.id,
+      },
+    });
+
+    return {
+      status: "success",
+      message: "Course deleted successfully",
+    };
+  } else {
     return {
       status: "error",
       message: "Unauthorized",
     };
   }
-
-  const result = await prisma.course.deleteMany({
-    where: {
-      id: courseId,
-      userId: session.user.id,
-    },
-  });
-
-  if (!result) {
-    return {
-      status: "error",
-      message: "Course not found or user unauthorized",
-    };
-  }
-
-  return {
-    status: "success",
-    message: "Course deleted successfully",
-  };
 };

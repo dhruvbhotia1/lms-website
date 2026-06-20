@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { TrashIcon } from "lucide-react";
 import { deleteCourse } from "@/hooks/courses/delete-course";
 import { useRouter } from "next/navigation";
+import { deleteThumbnail } from "@/hooks/courses/delete-thumbnail";
 
 interface Props {
   courseId: string;

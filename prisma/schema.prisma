@@ -94,6 +94,7 @@ model Course {
   slug             String         @unique
   status           CourseStatus   @default(Draft)
   thumbnail        String
+  Chapters         Chapter[]
 
   @@index([userId])
   @@map("course")
@@ -124,4 +125,27 @@ enum CourseCategory {
   Music
   Teaching_and_Academics @map("Teaching and Academics")
   Other
+}
+
+model Chapter {
+  id        String   @id @default(uuid())
+  title     String
+  position  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  course    Course   @relation(fields: [courseId], references: [id])
+  courseId  String
+  lessons   Lesson[]
+}
+
+model Lesson {
+  id           String   @id @default(uuid())
+  title        String
+  description  String?
+  thumbnailKey String?
+  videoKey     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  chapter      Chapter  @relation(fields: [chapterId], references: [id])
+  chapterId    String
 }

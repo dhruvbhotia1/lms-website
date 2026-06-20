@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EditFormCourse } from "./_components/EditCourseForm";
 import { requireAdmin } from "@/app/data/admin/require-admin";
 import { notFound } from "next/navigation";
+import { CourseStructure } from "./_components/CourseStructure";
 
 interface Props {
   params: Promise<{ courseId: string }>;
@@ -54,6 +55,20 @@ export default async function CourseEditPage({ params }: Props) {
 
             <CardContent>
               <EditFormCourse course={course} />
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="course-structure">
+          <Card>
+            <CardHeader>
+              <CardTitle>Course Structure</CardTitle>
+
+              <CardDescription>Edit the chapters in the course.</CardDescription>
+            </CardHeader>
+
+            <CardContent>
+              <CourseStructure />
             </CardContent>
           </Card>
         </TabsContent>
