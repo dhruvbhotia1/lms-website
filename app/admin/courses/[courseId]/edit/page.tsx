@@ -68,7 +68,7 @@ export default async function CourseEditPage({ params }: Props) {
             </CardHeader>
 
             <CardContent>
-              <CourseStructure />
+              <CourseStructure courseData={course} />
             </CardContent>
           </Card>
         </TabsContent>

@@ -94,7 +94,7 @@ model Course {
   slug             String         @unique
   status           CourseStatus   @default(Draft)
   thumbnail        String
-  Chapters         Chapter[]
+  chapters         Chapter[]
 
   @@index([userId])
   @@map("course")
@@ -136,6 +136,8 @@ model Chapter {
   course    Course   @relation(fields: [courseId], references: [id])
   courseId  String
   lessons   Lesson[]
+
+  @@map("chapter")
 }
 
 model Lesson {
@@ -148,4 +150,7 @@ model Lesson {
   updatedAt    DateTime @updatedAt
   chapter      Chapter  @relation(fields: [chapterId], references: [id])
   chapterId    String
+  position     Int
+
+  @@map("lesson")
 }

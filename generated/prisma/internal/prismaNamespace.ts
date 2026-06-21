@@ -1071,7 +1071,8 @@ export const LessonScalarFieldEnum = {
   videoKey: 'videoKey',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  chapterId: 'chapterId'
+  chapterId: 'chapterId',
+  position: 'position'
 } as const
 
 export type LessonScalarFieldEnum = (typeof LessonScalarFieldEnum)[keyof typeof LessonScalarFieldEnum]

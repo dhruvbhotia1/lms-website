@@ -29,6 +29,23 @@ export async function adminGetCourse({ courseId }: Props) {
       smallDescription: true,
       thumbnail: true,
       userId: true, // to validate ownership before displaying the course on the page.tsx
+      chapters: {
+        select: {
+          id: true,
+          title: true,
+          position: true,
+          lessons: {
+            select: {
+              id: true,
+              title: true,
+              description: true,
+              thumbnailKey: true,
+              position: true,
+              videoKey: true,
+            },
+          },
+        },
+      },
     },
   });
 
