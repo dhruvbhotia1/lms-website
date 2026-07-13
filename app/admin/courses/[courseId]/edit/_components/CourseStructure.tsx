@@ -1,97 +1,77 @@
 "use client";
 
-import { AdminGetCourseType } from "@/app/data/admin/admin-get-course";
+import { DraggableSyntheticListeners, rectIntersection } from "@dnd-kit/core";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { AdminGetCourseType } from "@/app/data/admin/admin-get-course";
+import { useState } from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { useSortable } from "@dnd-kit/react/sortable";
-import { ChevronDown, ChevronRight, GripVertical } from "lucide-react";
-import { useRef, useState } from "react";
-import { DragDropProvider } from "@dnd-kit/react";
-import { move } from "@dnd-kit/helpers";
+  DndContext,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { cn } from "@/lib/utils";
+import { Collapsible, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { GripVertical } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface Props {
   courseData: AdminGetCourseType;
 }
 
-interface SortableProps {
+interface SortableItemProps {
   id: string;
-  index: number;
-  isOpen: boolean;
-  onToggle: () => void;
-  title: string;
+  children: (listeners: DraggableSyntheticListeners) => React.ReactNode;
+  className?: string;
   data?: {
-    type: "chapter" | "lesson";
-    chapterId?: string;
+    type: "lesson" | "chapter";
   };
 }
 
-function LessonSortable();
+function SortableItem({ id, children, className, data }: SortableItemProps) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
+    useSortable({
+      id,
+      data,
+    });
 
-function ChapterSortable({ id, index, isOpen, onToggle, title }: SortableProps) {
-  const [element, setElement] = useState<HTMLDivElement | null>(null);
-  const handleRef = useRef<HTMLButtonElement | null>(null);
-  const { isDragging } = useSortable({
-    id,
-    index,
-    element,
-    handle: handleRef,
-  });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   return (
-    <Card ref={setElement} className="item cursor-pointer p-4">
-      <Collapsible open={isOpen} onOpenChange={() => onToggle()}>
-        <CardHeader>
-          <div className="flex items-center justify-between p-3 border-b border-border">
-            <div className="flex items-center gap-2">
-              <Button
-                ref={handleRef}
-                variant="ghost"
-                size="icon"
-                className="cursor-grab opacity-60 hover:opacity-100 flex gap-2 items-center"
-              >
-                <GripVertical className="size-4" />
-              </Button>
-
-              <CardTitle>
-                <p className="text-md font-semibold capitalize">{title}</p>
-              </CardTitle>
-
-              <CollapsibleTrigger>
-                <Button variant="ghost" size="icon">
-                  {isOpen ? (
-                    <ChevronDown className="size-4" />
-                  ) : (
-                    <ChevronRight className="size-4" />
-                  )}
-                </Button>
-              </CollapsibleTrigger>
-            </div>
-          </div>
-        </CardHeader>
-
-        <CollapsibleContent>
-          <div className="p-1"></div>
-        </CollapsibleContent>
-      </Collapsible>
-    </Card>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      className={cn("touch-none", className, isDragging ? "z-10" : "")}
+    >
+      {children(listeners)}
+    </div>
   );
 }
 
 export function CourseStructure({ courseData }: Props) {
-  const items = [1, 2, 3, 4];
+  const mouseSensor = useSensor(MouseSensor);
+  const touchSensor = useSensor(TouchSensor);
+  const keyboardSensor = useSensor(KeyboardSensor);
 
-  const toggleChapter = ({ chapterId }: { chapterId: string }) => {
-    setInitialItems(() =>
-      initialItems.map((chapter) =>
-        chapter.id === chapterId ? { ...chapter, isOpen: !chapter.isOpen } : chapter,
-      ),
-    );
-  };
+  const sensors = useSensors(mouseSensor, touchSensor, keyboardSensor);
+
+  function handleDragEnd(event) {
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      // Swap the positions of the active and over items
+    }
+  }
 
   const [initialItems, setInitialItems] = useState(
     courseData.chapters?.map((chapter) => ({
@@ -101,38 +81,82 @@ export function CourseStructure({ courseData }: Props) {
       isOpen: true,
       lessons: chapter.lessons.map((lesson) => ({
         id: lesson.id,
+        chapterId: lesson.chapterId,
         title: lesson.title,
         order: lesson.position,
       })),
     })) || [],
   );
 
+  function toggleChapter(chapterId: string) {
+    setInitialItems(
+      initialItems.map((item) =>
+        item.id === chapterId ? { ...item, isOpen: !item.isOpen } : item,
+      ),
+    );
+  }
+
   return (
-    <DragDropProvider
-      onDragEnd={(event) => {
-        setInitialItems((items) => move(items, event));
-      }}
+    <DndContext
+      collisionDetection={rectIntersection}
+      onDragEnd={handleDragEnd}
+      sensors={sensors}
     >
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Edit Course Structure </CardTitle>
+        <CardHeader className="flex flex-row items-center justify-between border-b border-border">
+          <CardTitle>Chapters</CardTitle>
         </CardHeader>
 
         <CardContent>
-          <ul className="list">
-            {initialItems.map((chapter) => (
-              <ChapterSortable
-                key={chapter.id}
-                id={chapter.id}
-                index={chapter.order}
-                isOpen={chapter.isOpen}
-                title={chapter.title}
-                onToggle={() => toggleChapter({ chapterId: chapter.id })}
-              />
+          <SortableContext
+            strategy={verticalListSortingStrategy}
+            items={initialItems.map((item) => item.id)}
+          >
+            {initialItems.map((item) => (
+              <SortableItem id={item.id} data={{ type: "chapter" }} key={item.id}>
+                {(listeners) => (
+                  <Card>
+                    <Collapsible
+                      open={item.isOpen}
+                      onOpenChange={() => toggleChapter(item.id)}
+                    >
+                      <div className="flex items-center justify-between p-3 border-b border-border">
+                        <div className="flex items-center gap-2">
+                          <Button
+                            size={"icon"}
+                            variant="ghost"
+                            className="cursor-grab opacity-60 hover:opactiy-100"
+                            {...listeners}
+                          >
+                            <GripVertical className="h-4 w-4" />
+                          </Button>
+                          <CollapsibleTrigger asChild>
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              className="flex items-center"
+                            >
+                              {item.isOpen ? (
+                                <ChevronDown className="size-4" />
+                              ) : (
+                                <ChevronRight className="size-4" />
+                              )}
+                            </Button>
+                          </CollapsibleTrigger>
+
+                          <p className="cursor-pointer hover:text-primary pl-2">
+                            {item.title}
+                          </p>
+                        </div>
+                      </div>
+                    </Collapsible>
+                  </Card>
+                )}
+              </SortableItem>
             ))}
-          </ul>
+          </SortableContext>
         </CardContent>
       </Card>
-    </DragDropProvider>
+    </DndContext>
   );
 }

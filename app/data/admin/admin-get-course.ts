@@ -37,6 +37,7 @@ export async function adminGetCourse({ courseId }: Props) {
           lessons: {
             select: {
               id: true,
+              chapterId: true,
               title: true,
               description: true,
               thumbnailKey: true,
