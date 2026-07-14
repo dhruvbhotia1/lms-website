@@ -16,10 +16,11 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { cn } from "@/lib/utils";
-import { Collapsible, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { GripVertical } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { DeleteIcon, FileText, GripVertical, Trash2 } from "lucide-react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface Props {
   courseData: AdminGetCourseType;
@@ -31,6 +32,7 @@ interface SortableItemProps {
   className?: string;
   data?: {
     type: "lesson" | "chapter";
+    chapterId?: string;
   };
 }
 
@@ -135,6 +137,7 @@ export function CourseStructure({ courseData }: Props) {
                               size="icon"
                               variant="ghost"
                               className="flex items-center"
+
                             >
                               {item.isOpen ? (
                                 <ChevronDown className="size-4" />
@@ -148,7 +151,56 @@ export function CourseStructure({ courseData }: Props) {
                             {item.title}
                           </p>
                         </div>
+
+                        <Button size="icon" variant="outline">
+                          <Trash2 className="size-4"/>
+                        </Button>
                       </div>
+
+                      <CollapsibleContent>
+                        <div className="p-1">
+
+                          <SortableContext items={item.lessons.map((lesson) => lesson.id)} strategy={verticalListSortingStrategy}>
+
+                            {item.lessons.map((lesson) => (
+                              <SortableItem key={lesson.id} id={lesson.id} data={{ type: "lesson", chapterId: item.id }}>
+
+                                {(lessonListeners) => (
+                                  <div className="flex items-center justify-between p-2 hover:bg-accent rounded-sm">
+                                    <div className="flex items-center gap-3">
+                                      <Button variant="ghost" size="icon" {...lessonListeners} className="cursor-grab">
+                                        <GripVertical className="size-4 "/>
+
+                                      </Button>
+
+                                      <FileText className="size-4" />
+                                      <Link href={ `/admin/course/${courseData.id}/${item.id}/${lesson.id}`}>{lesson.title}</Link>
+
+                                    </div>
+
+                                    <Button variant="outline" size="icon">
+
+                                      <Trash2 className="size-4"/>
+
+                                    </Button>
+
+                                  </div>
+                                )}
+
+
+                              </SortableItem>
+                            ))}
+
+                          </SortableContext>
+
+                          <div className="p-2">
+
+                            <Button variant="outline" className="w-1/2 mx-auto block">Create New Lesson</Button>
+
+                          </div>
+
+                        </div>
+                      </CollapsibleContent>
                     </Collapsible>
                   </Card>
                 )}
