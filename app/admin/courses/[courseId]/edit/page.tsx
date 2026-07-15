@@ -20,7 +20,7 @@ export default async function CourseEditPage({ params }: Props) {
 
   const course = await adminGetCourse({ courseId });
 
-  console.log(course.category);
+
 
   const session = await requireAdmin();
 
