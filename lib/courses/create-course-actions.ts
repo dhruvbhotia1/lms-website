@@ -1,11 +1,11 @@
 "use server";
 
-import { courseSchema, CourseSchemaType } from "./zodSchema";
+import { courseSchema, CourseSchemaType } from "../zodSchema";
 import { prisma } from "@/lib/prisma";
-import { ApiResponse } from "./types";
+import { ApiResponse } from "../types";
 import { requireAdmin } from "@/app/data/admin/require-admin";
-import arcjet from "./arcjet";
-import { detectBot, fixedWindow } from "./arcjet";
+import arcjet from "../arcjet";
+import { detectBot, fixedWindow } from "../arcjet";
 import { request } from "@arcjet/next";
 
 const aj = arcjet

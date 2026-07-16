@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { toast } from "sonner";
 import { reorderLessons, reorderChapters } from "@/lib/reorder";
+import { NewChapterModal } from "./NewChapterModal";
 
 
 interface Props {
@@ -289,6 +290,7 @@ export function CourseStructure({ courseData }: Props) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between border-b border-border">
           <CardTitle>Chapters</CardTitle>
+          <NewChapterModal courseId={courseData.id} />
         </CardHeader>
 
         <CardContent className="space-y-8">

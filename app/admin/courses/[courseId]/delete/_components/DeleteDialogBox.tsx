@@ -12,9 +12,9 @@ import { Input } from "@/components/ui/input";
 import { useTransition, useState } from "react";
 import { toast } from "sonner";
 import { TrashIcon } from "lucide-react";
-import { deleteCourse } from "@/hooks/courses/delete-course";
+import { deleteCourse } from "@/lib/courses/delete-course";
 import { useRouter } from "next/navigation";
-import { deleteThumbnail } from "@/hooks/courses/delete-thumbnail";
+import { deleteThumbnail } from "@/lib/courses/delete-thumbnail";
 
 interface Props {
   courseId: string;
@@ -35,6 +35,13 @@ export function DeleteDialogBox({ courseId }: Props) {
 
     try {
       startDeleteTransition(async () => {
+        const deleteImageObject = await deleteThumbnail({ courseId });
+
+        if (deleteImageObject.status === "error") {
+          toast.error(deleteImageObject.message);
+          return;
+        }
+
         const result = await deleteCourse({ courseId, userEmail: email });
 
         if (result.status === "success") {

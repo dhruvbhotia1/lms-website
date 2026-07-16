@@ -1,11 +1,11 @@
 "use server";
 
 import { requireAdmin } from "@/app/data/admin/require-admin";
-import { courseSchema, CourseSchemaType } from "./zodSchema";
-import { ApiResponse } from "./types";
-import { prisma } from "./prisma";
-import arcjet from "./arcjet";
-import { detectBot, fixedWindow } from "./arcjet";
+import { courseSchema, CourseSchemaType } from "../zodSchema";
+import { ApiResponse } from "../types";
+import { prisma } from "../prisma";
+import arcjet from "../arcjet";
+import { detectBot, fixedWindow } from "../arcjet";
 import { request } from "@arcjet/next";
 
 interface Props {

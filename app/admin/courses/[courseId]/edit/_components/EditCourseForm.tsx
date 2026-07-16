@@ -30,7 +30,7 @@ import { CourseSchemaType, courseSchema } from "@/lib/zodSchema";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { editCourse } from "@/lib/edit-form-actions";
+import { editCourse } from "@/lib/courses/edit-course-actions";
 import type { AdminGetCourseType } from "@/app/data/admin/admin-get-course";
 import slugify from "slugify";
 

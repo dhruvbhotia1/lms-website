@@ -33,7 +33,7 @@ import {
 import { courseCategories } from "@/lib/zodSchema";
 import RichTextEditor from "@/components/rich-text-editor/Editor";
 import { Uploader } from "@/components/file-uploader/Uploader";
-import { createCourse } from "@/lib/create-form-actions";
+import { createCourse } from "@/lib/courses/create-course-actions";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
