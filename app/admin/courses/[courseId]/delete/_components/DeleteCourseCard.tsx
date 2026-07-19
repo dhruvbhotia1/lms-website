@@ -20,14 +20,14 @@ interface Props {
   courseId: string;
 }
 
-export function DeleteDialogBox({ courseId }: Props) {
+export function DeleteCourseCard({ courseId }: Props) {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
 
   const [pendingTransition, startDeleteTransition] = useTransition();
 
-  const deletingCourse = ({ email }: { email: string }) => {
+  const deletingCourse = (email: string) => {
     if (!email) {
       toast.error("Email is required");
       return;
@@ -74,7 +74,7 @@ export function DeleteDialogBox({ courseId }: Props) {
         <Button
           variant={"destructive"}
           className="w-1/2 mx-auto"
-          onClick={() => deletingCourse({ email })}
+          onClick={() => deletingCourse(email)}
           disabled={pendingTransition}
         >
           <TrashIcon className="size-5" />

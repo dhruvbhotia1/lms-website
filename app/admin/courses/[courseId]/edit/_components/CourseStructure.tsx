@@ -17,13 +17,17 @@ import {
 } from "@dnd-kit/core";
 import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { FileText, GripVertical, Trash2 } from "lucide-react";
+import { FileText, GripVertical, Trash2, XIcon } from "lucide-react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { toast } from "sonner";
 import { reorderLessons, reorderChapters } from "@/lib/reorder";
 import { NewChapterModal } from "./NewChapterModal";
+import { NewLessonModal } from "./NewLessonModal";
+import { DeleteLesson } from "./DeleteLesson";
+import { DeleteChapter } from "./DeleteChapter";
+
 
 
 interface Props {
@@ -336,9 +340,7 @@ export function CourseStructure({ courseData }: Props) {
                           </p>
                         </div>
 
-                        <Button size="icon" variant="outline">
-                          <Trash2 className="size-4"/>
-                        </Button>
+                        <DeleteChapter chapterId={item.id} courseId={courseData.id} />
                       </div>
 
                       <CollapsibleContent>
@@ -362,11 +364,7 @@ export function CourseStructure({ courseData }: Props) {
 
                                     </div>
 
-                                    <Button variant="outline" size="icon">
-
-                                      <Trash2 className="size-4"/>
-
-                                    </Button>
+                                    <DeleteLesson lessonId={lesson.id} courseId={ courseData.id }/>
 
                                   </div>
                                 )}
@@ -377,9 +375,9 @@ export function CourseStructure({ courseData }: Props) {
 
                           </SortableContext>
 
-                          <div className="p-2">
+                          <div className="flex justify-center">
 
-                            <Button variant="outline" className="w-1/2 mx-auto block">Create New Lesson</Button>
+                            <NewLessonModal courseId={courseData.id} chapterId={item.id}/>
 
                           </div>
 

@@ -39,7 +39,7 @@ import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 export default function CourseCreatePage() {
-  const [createPending, startCreatTransition] = useTransition();
+  const [createPending, startCreateTransition] = useTransition();
   const router = useRouter();
 
   const form = useForm<CourseSchemaType>({
@@ -62,7 +62,7 @@ export default function CourseCreatePage() {
   //form submit function
 
   const onSubmit = async (values: CourseSchemaType) => {
-    startCreatTransition(async () => {
+    startCreateTransition(async () => {
       try {
         const result = await createCourse(values);
 

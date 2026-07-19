@@ -34,7 +34,7 @@ export const deleteCourse = async ({ courseId, userEmail }: Props): Promise<ApiR
         id: courseId,
         userId: session.user.id,
       },
-    });
+    }); //only going to delete on in any case because of the id: courseId, id will be unique, check is for extra security for the userid.
 
     return {
       status: "success",

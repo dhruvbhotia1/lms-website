@@ -36,7 +36,7 @@ model Session {
   ipAddress String?
   userAgent String?
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) //this is not a field but a relationship
 
   impersonatedBy String?
 
@@ -50,7 +50,7 @@ model Account {
   accountId             String
   providerId            String
   userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade) //this is not a field but a relationship
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -82,7 +82,7 @@ model Course {
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
   userId           String
-  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade) //this is not a field but a relationship
   title            String
   description      String
   fileKey          String
@@ -133,7 +133,7 @@ model Chapter {
   position  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade) //this is not a field but a relationship
   courseId  String
   lessons   Lesson[]
 
@@ -145,10 +145,10 @@ model Lesson {
   title        String
   description  String?
   thumbnailKey String?
-  videoKey     String
+  videoKey     String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  chapter      Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  chapter      Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade) //this is not a field but a relationship
   chapterId    String
   position     Int
 

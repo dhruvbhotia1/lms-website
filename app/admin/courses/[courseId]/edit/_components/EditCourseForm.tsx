@@ -39,7 +39,7 @@ interface EditFormCourseProps {
 }
 
 export function EditFormCourse({ course }: EditFormCourseProps) {
-  const [createPending, startCreatTransition] = useTransition();
+  const [createPending, startEditTransition] = useTransition();
   const router = useRouter();
   const params = useParams();
   const courseId = params.courseId as string;
@@ -77,7 +77,7 @@ export function EditFormCourse({ course }: EditFormCourseProps) {
       return;
     }
 
-    startCreatTransition(async () => {
+    startEditTransition(async () => {
       try {
         const result = await editCourse({ values, courseId });
 
@@ -85,7 +85,7 @@ export function EditFormCourse({ course }: EditFormCourseProps) {
           toast.success(result.message);
           form.reset();
           router.push("/admin/courses");
-        } else if (result.status === "error") {
+        } else  {
           toast.error(result.message);
         }
       } catch {
