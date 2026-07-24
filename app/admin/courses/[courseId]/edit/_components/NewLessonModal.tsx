@@ -12,7 +12,6 @@ import { useTransition } from "react";
 import { Loader, PlusIcon } from "lucide-react";
 import { toast } from "sonner";
 import { createLesson } from "@/lib/courses/create-lesson";
-import { refresh } from "next/cache";
 
 
 
@@ -31,7 +30,7 @@ export function NewLessonModal({ courseId, chapterId }: Props) {
   const form = useForm<LessonSchemaType>({
     resolver: zodResolver(lessonSchema),
     defaultValues: {
-      name: "",
+      title: "",
       chapterId: chapterId,
       courseId: courseId,
       description: "",
@@ -91,7 +90,7 @@ export function NewLessonModal({ courseId, chapterId }: Props) {
 
             <FieldGroup>
               <Controller
-                name={"name"}
+                name={"title"}
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid} className={"space-y-3"}>

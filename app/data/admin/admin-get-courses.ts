@@ -1,8 +1,16 @@
+import "server-only"
+
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "./require-admin";
+import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export async function adminGetCourses() {
   const session = await requireAdmin();
+
+  if (!session) {
+    redirect("/become-admin");
+  }
 
   const data = await prisma.course.findMany({
     where: {
@@ -24,6 +32,11 @@ export async function adminGetCourses() {
       thumbnail: true,
     },
   });
+
+  if (!data) {
+
+    return notFound();
+  }
 
   return data;
 }

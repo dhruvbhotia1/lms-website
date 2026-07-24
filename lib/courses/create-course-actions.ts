@@ -7,6 +7,7 @@ import { requireAdmin } from "@/app/data/admin/require-admin";
 import arcjet from "../arcjet";
 import { detectBot, fixedWindow } from "../arcjet";
 import { request } from "@arcjet/next";
+import { redirect } from "next/navigation";
 
 const aj = arcjet
   .withRule(
@@ -27,6 +28,10 @@ export async function createCourse(
   values: CourseSchemaType,
 ): Promise<ApiResponse> {
   const session = await requireAdmin(); //checks for logged in user and admin roles presence.
+
+  if (!session) {
+    return redirect('/become-admin');
+  }
 
   try {
     const decision = await aj.protect(await request(), {

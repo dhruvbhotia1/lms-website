@@ -1,7 +1,7 @@
 import "server-only";
 import { requireAdmin } from "./require-admin";
 import { prisma } from "@/lib/prisma";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 interface Props {
   courseId: string;
@@ -9,6 +9,11 @@ interface Props {
 
 export async function adminGetCourse({ courseId }: Props) {
   const session = await requireAdmin();
+
+  if (!session) {
+    redirect("/become-admin");
+  }
+
 
   const data = await prisma.course.findUnique({
     where: {
@@ -30,11 +35,17 @@ export async function adminGetCourse({ courseId }: Props) {
       thumbnail: true,
       userId: true, // to validate ownership before displaying the course on the page.tsx
       chapters: {
+        orderBy: {
+          position: "asc",
+        },
         select: {
           id: true,
           title: true,
           position: true,
           lessons: {
+            orderBy: {
+              position: "asc",
+            },
             select: {
               id: true,
               chapterId: true,

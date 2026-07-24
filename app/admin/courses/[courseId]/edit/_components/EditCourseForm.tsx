@@ -174,7 +174,7 @@ export function EditFormCourse({ course }: EditFormCourseProps) {
               <Field data-invalid={fieldState.invalid} className={"space-y-3"}>
                 <FieldLabel htmlFor={field.name}>Thumbnail</FieldLabel>
 
-                <Uploader onChange={field.onChange} value={field.value} />
+                <Uploader onChange={field.onChange} value={field.value} fileTypeAccepted="image"/>
 
                 {/*<Input {...field} id={field.name} aria-invalid={fieldState.invalid} placeholder={"Please provide the url for the thumbnail of this course."}/>*/}
 

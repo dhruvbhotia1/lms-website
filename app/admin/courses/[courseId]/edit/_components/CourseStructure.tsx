@@ -17,7 +17,7 @@ import {
 } from "@dnd-kit/core";
 import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { FileText, GripVertical, Trash2, XIcon } from "lucide-react";
+import { FileText, GripVertical } from "lucide-react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -286,6 +286,7 @@ export function CourseStructure({ courseData }: Props) {
 
 
   return (
+
     <DndContext
       collisionDetection={rectIntersection}
       onDragEnd={handleDragEnd}
@@ -360,16 +361,12 @@ export function CourseStructure({ courseData }: Props) {
                                       </Button>
 
                                       <FileText className="size-4" />
-                                      <Link href={ `/admin/course/${courseData.id}/${item.id}/${lesson.id}`}>{lesson.title}</Link>
+                                      <Link href={`/admin/courses/${courseData.id}/${item.id}/${lesson.id}`}>{lesson.title}</Link>
 
                                     </div>
-
-                                    <DeleteLesson lessonId={lesson.id} courseId={ courseData.id }/>
-
+                                    <DeleteLesson chapterId={lesson.chapterId} lessonId={lesson.id} courseId={ courseData.id }/>
                                   </div>
                                 )}
-
-
                               </SortableItem>
                             ))}
 

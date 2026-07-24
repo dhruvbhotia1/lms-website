@@ -8,6 +8,7 @@ import { revalidatePath } from "next/cache";
 interface Props {
 
   lessonId: string; //to fetch the lesson data from the db
+  chapterId: string;
   name: string; //name sent by the user to comapare.
   courseId: string;
 
@@ -15,7 +16,7 @@ interface Props {
 }
 
 
-export async function deleteLesson({ lessonId, name, courseId }: Props): Promise<ApiResponse> {
+export async function deleteLesson({ chapterId, lessonId, name, courseId }: Props): Promise<ApiResponse> {
 
   const session = await requireAdmin();
 
@@ -28,7 +29,8 @@ export async function deleteLesson({ lessonId, name, courseId }: Props): Promise
     const lessonToDelete = await prisma.lesson.findUnique({
       where: {
         id: lessonId
-      }
+      },
+
     });
 
     if (!lessonToDelete) {
@@ -39,9 +41,14 @@ export async function deleteLesson({ lessonId, name, courseId }: Props): Promise
       return { status: "error", message: "Lesson name does not match" };
     }
 
-    await prisma.lesson.delete({
+    if (chapterId !== lessonToDelete.chapterId) {
+      return { status: "error", message: "Chapter ID does not match" };
+    }
+
+    await prisma.lesson.deleteMany({
       where: {
-        id: lessonId
+        id: lessonId,
+        chapterId: chapterId
       }
     });
 

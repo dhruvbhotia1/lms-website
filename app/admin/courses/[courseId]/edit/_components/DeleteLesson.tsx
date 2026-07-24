@@ -10,10 +10,12 @@ import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, A
 
 
 interface Props {
+
+  chapterId: string;
   lessonId: string;
   courseId: string;
 }
-export function DeleteLesson({ lessonId, courseId }: Props) {
+export function DeleteLesson({ chapterId, lessonId, courseId }: Props) {
 
   const [pendingTransition, deletingLesson] = useTransition();
 
@@ -27,7 +29,7 @@ export function DeleteLesson({ lessonId, courseId }: Props) {
     deletingLesson(async () => {
       try {
 
-        const result = await deleteLesson({ name, lessonId, courseId});
+        const result = await deleteLesson({ name, lessonId, courseId, chapterId });
 
         if (result.status === "success") {
           toast.success("Lesson deleted successfully");

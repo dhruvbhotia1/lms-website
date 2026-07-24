@@ -38,7 +38,7 @@ export async function createLesson(values: LessonSchemaType): Promise<ApiRespons
 
         await tx.lesson.create({
           data: {
-            title: result.data.name,
+            title: result.data.title,
             chapterId: result.data.chapterId,
             position: maxPos ? maxPos.position + 1 : 1,
             videoKey: result.data.videoKey,

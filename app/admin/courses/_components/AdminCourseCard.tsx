@@ -1,6 +1,7 @@
 import { AdminCourseType } from "@/app/data/admin/admin-get-courses";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useConstructUrl } from "@/hooks/use-construct-url";
 
 import { School, TimerIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
@@ -16,6 +17,8 @@ function stripHtml(htmlString: string) {
 }
 
 export function AdminCourseCard({ data }: Props) {
+  const { thumbnail } = data;
+  const thumbnailUrl = useConstructUrl({key : thumbnail});
   const plainTextDescription = stripHtml(data.smallDescription || "");
 
   return (
@@ -31,7 +34,7 @@ export function AdminCourseCard({ data }: Props) {
       </div>
 
       <Image
-        src={`${process.env.NEXT_PUBLIC_S3_BUCKET_DEVELOPMENT_URL}/${data.thumbnail}`}
+        src={thumbnailUrl}
         height={400}
         width={600}
         alt="logo"
