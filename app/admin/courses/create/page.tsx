@@ -37,10 +37,14 @@ import { createCourse } from "@/lib/courses/create-course-actions";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { useConfetti } from "@/hooks/use-confetti";
+
 
 export default function CourseCreatePage() {
   const [createPending, startCreateTransition] = useTransition();
   const router = useRouter();
+
+  const { triggerConfetti } = useConfetti();
 
   const form = useForm<CourseSchemaType>({
     resolver: zodResolver(courseSchema),
@@ -68,6 +72,7 @@ export default function CourseCreatePage() {
 
         if (result.status === "success") {
           toast.success(result.message);
+          triggerConfetti();
           form.reset();
           router.push("/admin/courses");
         } else if (result.status === "error") {
@@ -196,9 +201,7 @@ export default function CourseCreatePage() {
                     <Field data-invalid={fieldState.invalid} className={"space-y-3"}>
                       <FieldLabel htmlFor={field.name}>Thumbnail</FieldLabel>
 
-                      <Uploader onChange={field.onChange} value={field.value} />
-
-                      {/*<Input {...field} id={field.name} aria-invalid={fieldState.invalid} placeholder={"Please provide the url for the thumbnail of this course."}/>*/}
+                      <Uploader onChange={field.onChange} value={field.value} fileTypeAccepted="image"/>
 
                       {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                     </Field>

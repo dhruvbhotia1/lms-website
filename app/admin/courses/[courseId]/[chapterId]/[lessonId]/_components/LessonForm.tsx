@@ -38,7 +38,7 @@ export function LessonForm({ data, chapterId, courseId }: Props) {
   const form = useForm<LessonSchemaType>({
     resolver: zodResolver(lessonSchema),
     defaultValues: {
-      title: "",
+      title: data.title ?? "",
       chapterId: chapterId,
       courseId: courseId,
       description: data.description ?? undefined,

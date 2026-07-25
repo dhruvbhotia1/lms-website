@@ -14,7 +14,6 @@ import { toast } from "sonner";
 import { TrashIcon } from "lucide-react";
 import { deleteCourse } from "@/lib/courses/delete-course";
 import { useRouter } from "next/navigation";
-import { deleteThumbnail } from "@/lib/courses/delete-thumbnail";
 
 interface Props {
   courseId: string;
@@ -24,6 +23,8 @@ export function DeleteCourseCard({ courseId }: Props) {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
+
+  const [courseName, setCourseName] = useState("");
 
   const [pendingTransition, startDeleteTransition] = useTransition();
 
@@ -35,14 +36,8 @@ export function DeleteCourseCard({ courseId }: Props) {
 
     try {
       startDeleteTransition(async () => {
-        const deleteImageObject = await deleteThumbnail({ courseId });
 
-        if (deleteImageObject.status === "error") {
-          toast.error(deleteImageObject.message);
-          return;
-        }
-
-        const result = await deleteCourse({ courseId, userEmail: email });
+        const result = await deleteCourse({ courseId, userEmail: email, name: courseName });
 
         if (result.status === "success") {
           toast.success("Course deleted successfully");
@@ -69,6 +64,13 @@ export function DeleteCourseCard({ courseId }: Props) {
           type={"email"}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <Input
+          placeholder={"Please type the name of the course to confirm."}
+          type={"text"}
+          value={courseName}
+          onChange={(e) => setCourseName(e.target.value)}
         />
 
         <Button

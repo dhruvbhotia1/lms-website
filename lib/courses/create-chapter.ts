@@ -2,7 +2,6 @@
 
 import { requireAdmin } from "@/app/data/admin/require-admin";
 import { ApiResponse } from "../types";
-import { safeParse } from "zod/v4/core";
 import { ChapterSchemaType } from "../zodSchema";
 import { chapterSchema } from "../zodSchema";
 import { prisma } from "../prisma";

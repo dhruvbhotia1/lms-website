@@ -24,26 +24,34 @@ export async function deleteLesson({ chapterId, lessonId, name, courseId }: Prop
     return { status: "error", message: "Unauthorized" };
   }
 
-  try {
-
-    const lessonToDelete = await prisma.lesson.findUnique({
-      where: {
-        id: lessonId
-      },
-
-    });
-
-    if (!lessonToDelete) {
-      return { status: "error", message: "Lesson not found" };
+  const lessonToDelete = await prisma.lesson.findUnique({
+    where: {
+      id: lessonId
+    },
+    select: {
+      title: true,
+      chapter: {
+        select: {
+          id: true,
+          course: {
+            select: {
+              userId: true,
+            }
+          }
+        }
+      }
     }
 
-    if (lessonToDelete.title !== name) {
-      return { status: "error", message: "Lesson name does not match" };
-    }
+  });
 
-    if (chapterId !== lessonToDelete.chapterId) {
-      return { status: "error", message: "Chapter ID does not match" };
-    }
+  if (!lessonToDelete) {
+
+    return {status: "error", message: "No lesson to delete."}
+  }
+
+  const isAuthorized = session.user.id === lessonToDelete.chapter.course.userId && chapterId === lessonToDelete.chapter.id && lessonToDelete.title === name;
+
+  if (isAuthorized) {
 
     await prisma.lesson.deleteMany({
       where: {
@@ -55,10 +63,15 @@ export async function deleteLesson({ chapterId, lessonId, name, courseId }: Prop
     revalidatePath(`/admin/courses/${courseId}/edit`);
 
     return { status: "success", message: "Lesson deleted successfully" };
+  } else {
 
-  } catch  {
-    return { status: "error", message: "Failed to delete lesson" };
+    return { status: "error", message: "Internal error occured while deleting this lesson." }
+
   }
+
+
+
+
 
 
 }

@@ -6,6 +6,9 @@ import { notFound } from "next/navigation";
 import { redirect } from "next/navigation";
 
 export async function adminGetCourses() {
+
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+
   const session = await requireAdmin();
 
   if (!session) {

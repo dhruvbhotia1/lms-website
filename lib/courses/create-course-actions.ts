@@ -88,7 +88,7 @@ export async function createCourse(
     console.log(error);
     return {
       status: "error",
-      message: "Failed to create course.",
+      message: "Failed to create course.Please recheck all values. Remember slugs of your courses should be unique.",
     };
   }
 }

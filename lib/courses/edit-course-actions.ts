@@ -75,7 +75,7 @@ export async function editCourse({ values, courseId }: Props): Promise<ApiRespon
   } catch (error) {
     return {
       status: "error",
-      message: error instanceof Error ? error.message : String(error),
+      message: "Failed to edit course.Please recheck all values. Remember slugs of your courses should be unique.",
     };
   }
 }
