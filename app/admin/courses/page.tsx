@@ -42,7 +42,7 @@ async function RenderCourses() {
       {data.length === 0 ? (
         <EmptyState title="No courses to show." description="You currently have 0 courses created. you can create your first course by click the button below." buttonText="Create Course" redirectLink={`/admin/courses/create` } />
       ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-7">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
             {
               data.map((course) => (
                 <AdminCourseCard data={course} key={course.id} />
