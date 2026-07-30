@@ -22,7 +22,7 @@ export default function RichTextEditor({ field }: { field: any }) {
       },
     },
     onUpdate: ({ editor }) => {
-      field.onChange(editor.getHTML());
+      field.onChange(JSON.stringify(editor.getJSON()));
     },
     content: (() => {
       if (!field.value) return "<p>Hello world</p>";

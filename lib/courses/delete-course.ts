@@ -57,11 +57,7 @@ export const deleteCourse = async ({ courseId, userEmail, name }: Props): Promis
       title: true,
       userId: true,
       thumbnail: true,
-      user: {
-        select: {
-          email: true,
-        }
-      }
+      user: true,
     }
   });
 
@@ -71,6 +67,8 @@ export const deleteCourse = async ({ courseId, userEmail, name }: Props): Promis
       message: "No course to delete."
     }
   };
+
+  //IMPLEMENT PASSWORD COMPARISON OR OTP VERFICATION BEFORE DELETING.
 
   const isAuthorized = session.user.id === courseToDelete.userId && session.user.email === courseToDelete.user.email && userEmail === courseToDelete.user.email;
 

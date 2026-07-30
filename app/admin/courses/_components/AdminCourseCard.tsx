@@ -54,7 +54,7 @@ export function AdminCourseCard({ data }: Props) {
           {plainTextDescription}
         </p>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pb-4">
           <div className="mt-4 flex items-center gap-x-5">
             <div className="flex gap-2 items-center">
               <TimerIcon className="size-6 p-1 rounded-md text-primary bg-primary/10" />
@@ -76,7 +76,7 @@ export function AdminCourseCard({ data }: Props) {
             href={`/admin/courses/${data.id}/edit`}
             className={buttonVariants({
               size: "sm",
-              className: "flex items-center gap-3 font-semibold",
+              className: "flex items-center gap-3 font-semibold mt-4",
             })}
           >
             <FaPen className="size-4" />
