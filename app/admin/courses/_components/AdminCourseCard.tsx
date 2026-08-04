@@ -8,6 +8,7 @@ import { School, TimerIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaDollarSign, FaPen } from "react-icons/fa6";
+import {RenderDescription} from "@/components/rich-text-editor/RenderDescription";
 
 interface Props {
   data: AdminCourseType;
@@ -20,7 +21,7 @@ function stripHtml(htmlString: string) {
 export function AdminCourseCard({ data }: Props) {
   const { thumbnail } = data;
   const thumbnailUrl = useConstructUrl({key : thumbnail});
-  const plainTextDescription = stripHtml(data.smallDescription || "");
+
 
   return (
     <Card className="group relative p-0 overflow-hidden">
@@ -50,9 +51,9 @@ export function AdminCourseCard({ data }: Props) {
           {data.title}
         </Link>
 
-        <p className="line-clamp-2 text-muted-foreground leading-tight mt-2">
-          {plainTextDescription}
-        </p>
+        <div>
+          <RenderDescription json={JSON.parse(data.smallDescription)}/>
+        </div>
 
         <div className="flex items-center justify-between pb-4">
           <div className="mt-4 flex items-center gap-x-5">

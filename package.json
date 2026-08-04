@@ -29,6 +29,7 @@
     "@tanstack/react-table": "^8.21.3",
     "@tiptap/extension-character-count": "^3.26.1",
     "@tiptap/extension-text-align": "^3.26.1",
+    "@tiptap/html": "^3.29.2",
     "@tiptap/pm": "^3.26.1",
     "@tiptap/react": "^3.26.1",
     "@tiptap/starter-kit": "^3.26.1",

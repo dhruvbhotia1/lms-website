@@ -25,7 +25,8 @@ export default arcjet({
     rules: [
         shield({
             mode: 'LIVE'
-        })
+        }),
+
     ],
 
 

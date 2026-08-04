@@ -3,11 +3,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+
+  allowedDevOrigins: ['192.168.4.40'],
+
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "pub-0a3c61685844413fbb467d33ca580591.r2.dev",
+        hostname: "*.r2.dev",
         port: "",
         pathname: "/**",
       },

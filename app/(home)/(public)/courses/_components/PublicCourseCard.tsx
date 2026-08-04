@@ -7,6 +7,7 @@ import Link from "next/link"
 import { School, TimerIcon } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
+import {RenderDescription} from "@/components/rich-text-editor/RenderDescription";
 
 interface Props {
   data: UserGetAllCoursesType
@@ -35,7 +36,9 @@ export function PublicCourseCard({ data }: Props) {
 
         </Link>
 
-        <p className="line-clamp-2 text-sm text-muted-foreground leading-tight mt-2">{data.smallDescription}</p>
+        <div>
+          <RenderDescription json={JSON.parse(data.smallDescription)}/>
+        </div>
 
         <div className="mt-5 flex items-center justify-between">
 
