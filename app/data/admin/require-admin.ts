@@ -10,11 +10,11 @@ export async function requireAdmin() {
   });
 
   if (!session) {
-    return redirect("/login");
+     redirect("/login");
   }
 
   if (session.user.role !== "admin") {
-    return redirect("/not-admin");
+     redirect("/not-admin");
 
     //make a page that says "you are not an admin" and a button to become an admin, add logic to change the role to admin for a specific user.
   }

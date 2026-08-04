@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { ApiResponse } from "@/lib/types";
 import { deleteThumbnail } from "./delete-thumbnail";
 import arcjet from "../arcjet";
-import { detectBot, fixedWindow } from "../arcjet";
+import { detectBot, fixedWindow } from "arcjet";
 import { request } from "@arcjet/next";
 
 interface Props {
@@ -54,10 +54,9 @@ export const deleteCourse = async ({ courseId, userEmail, name }: Props): Promis
       id: courseId
     },
     select: {
-      title: true,
       userId: true,
+      title: true,
       thumbnail: true,
-      user: true,
     }
   });
 
@@ -66,11 +65,11 @@ export const deleteCourse = async ({ courseId, userEmail, name }: Props): Promis
       status: "error",
       message: "No course to delete."
     }
-  };
+  }
 
-  //IMPLEMENT PASSWORD COMPARISON OR OTP VERFICATION BEFORE DELETING.
+  //IMPLEMENT PASSWORD COMPARISON OR OTP VERIFICATION BEFORE DELETING.
 
-  const isAuthorized = session.user.id === courseToDelete.userId && session.user.email === courseToDelete.user.email && userEmail === courseToDelete.user.email;
+  const isAuthorized = session.user.id === courseToDelete.userId! && session.user.email === userEmail;
 
   if (isAuthorized && courseToDelete.title === name) {
     const deleteThumbnailResult = await deleteThumbnail({ courseThumbnailKey: courseToDelete.thumbnail });
