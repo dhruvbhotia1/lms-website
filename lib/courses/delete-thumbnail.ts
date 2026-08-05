@@ -1,7 +1,7 @@
 "use server";
-import { requirePublisher } from "@/app/data/publisher/require-publisher";
-import { S3 } from "@/lib/S3Client";
-import { ApiResponse } from "@/lib/types";
+import { requirePublisher } from "@/lib/auth/require-publisher";
+import { S3 } from "@/lib/auth/S3Client";
+import { ApiResponse } from "@/lib/auth/apiResponseTypes";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 export const deleteThumbnail = async ({

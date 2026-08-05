@@ -5,7 +5,7 @@ import {Button} from "@/components/ui/button";
 import {FaGithub, FaGoogle} from "react-icons/fa6";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
-import {authClient} from "@/lib/auth-client";
+import {authClient} from "@/lib/auth/auth-client";
 import {useState, useTransition} from "react";
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";

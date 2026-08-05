@@ -1,4 +1,4 @@
-import { publisherGetCourse } from "@/app/data/publisher/publisher-get-course";
+import { publisherGetCourse } from "@/lib/courses/publisher-get-course";
 import {
   Card,
   CardDescription,
@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EditFormCourse } from "./_components/EditCourseForm";
-import { requirePublisher } from "@/app/data/publisher/require-publisher";
+import { requirePublisher } from "@/lib/auth/require-publisher";
 import { notFound } from "next/navigation";
 import { CourseStructure } from "./_components/CourseStructure";
 

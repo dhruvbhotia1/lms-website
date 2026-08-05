@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-import { publisherGetCourses } from "@/app/data/publisher/publisher-get-courses";
+import { publisherGetCourses } from "@/lib/courses/publisher-get-courses";
 import { PublisherCourseCard } from "./_components/PublisherCourseCard";
 import { EmptyState } from "@/components/EmptyState";
 import { Suspense } from "react";

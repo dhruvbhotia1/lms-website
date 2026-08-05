@@ -4,7 +4,7 @@ import {Card, CardContent, CardTitle, CardHeader, CardDescription} from "@/compo
 import {InputOTP, InputOTPGroup, InputOTPSlot} from "@/components/ui/input-otp";
 import {useEffect, useState, useTransition} from "react";
 import {Button} from "@/components/ui/button";
-import {authClient} from "@/lib/auth-client";
+import {authClient} from "@/lib/auth/auth-client";
 import {Loader2Icon} from "lucide-react";
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";

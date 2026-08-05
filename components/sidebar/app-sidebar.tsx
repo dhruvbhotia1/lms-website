@@ -17,7 +17,7 @@ import {
 import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, UsersIcon, CameraIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon} from "lucide-react"
 import Link from "next/link";
 import Image from "next/image";
-import {authClient} from "@/lib/auth-client";
+import {authClient} from "@/lib/auth/auth-client";
 
 
 interface Props extends React.ComponentProps<typeof Sidebar> {

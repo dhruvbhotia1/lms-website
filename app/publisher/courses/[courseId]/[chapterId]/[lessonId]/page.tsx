@@ -1,4 +1,4 @@
-import { publisherGetLesson } from "@/lib/lessons/publisher-get-lesson";
+import { publisherGetLesson } from "@/lib/courses/lessons/publisher-get-lesson";
 import { LessonForm } from "./_components/LessonForm";
 
 interface Props {

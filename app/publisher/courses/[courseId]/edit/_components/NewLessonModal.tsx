@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { lessonSchema, LessonSchemaType } from "@/lib/zodSchema";
+import { lessonSchema, LessonSchemaType } from "@/lib/db/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Field, FieldGroup, FieldLabel, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -11,7 +11,7 @@ import { Controller } from "react-hook-form";
 import { useTransition } from "react";
 import { Loader, PlusIcon } from "lucide-react";
 import { toast } from "sonner";
-import { createLesson } from "@/lib/courses/create-lesson";
+import { createLesson } from "@/lib/courses/lessons/create-lesson";
 
 
 

@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { auth } from "@/lib/auth/auth";
 import findIp from "@arcjet/ip"
 import {
     type ArcjetDecision,
@@ -13,7 +13,7 @@ import {
 } from "@arcjet/next";
 import { toNextJsHandler } from "better-auth/next-js";
 import { NextRequest } from "next/server";
-import arcjet from "@/lib/arcjet"
+import arcjet from "@/lib/auth/arcjet"
 
 // The arcjet instance is created outside of the handler
 const aj = arcjet;

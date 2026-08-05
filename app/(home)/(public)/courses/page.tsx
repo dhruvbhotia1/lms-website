@@ -1,4 +1,4 @@
-import { userGetAllCourses } from "@/hooks/public/course/user-get-all-courses"
+import { userGetAllCourses } from "@/lib/courses/user-get-all-courses"
 import { PublicCourseCard, PublicCourseCardSkeleton } from "./_components/PublicCourseCard";
 import { Suspense } from "react";
 

@@ -10,7 +10,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
-import { courseLevel, courseSchema, CourseSchemaType, courseStatus } from "@/lib/zodSchema";
+import { courseLevel, courseSchema, CourseSchemaType, courseStatus } from "@/lib/db/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Field,
@@ -30,14 +30,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { courseCategories } from "@/lib/zodSchema";
+import { courseCategories } from "@/lib/db/zodSchema";
 import RichTextEditor from "@/components/rich-text-editor/Editor";
 import { Uploader } from "@/components/file-uploader/Uploader";
 import { createCourse } from "@/lib/courses/create-course-actions";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { useConfetti } from "@/hooks/use-confetti";
+import { useConfetti } from "@/lib/use-confetti";
 
 
 export default function CourseCreatePage() {

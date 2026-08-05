@@ -1,7 +1,7 @@
 import "server-only"
 
-import { prisma } from "@/lib/prisma";
-import { requirePublisher } from "./require-publisher";
+import { prisma } from "@/lib/db/prisma";
+import { requirePublisher } from "../auth/require-publisher";
 import { notFound } from "next/navigation";
 import { redirect } from "next/navigation";
 

@@ -1,10 +1,10 @@
 "use server";
 
-import { requirePublisher } from "@/app/data/publisher/require-publisher";
-import { ApiResponse } from "../types";
-import { ChapterSchemaType } from "../zodSchema";
-import { chapterSchema } from "../zodSchema";
-import { prisma } from "../prisma";
+import { requirePublisher } from "@/lib/auth/require-publisher";
+import { ApiResponse } from "../../auth/apiResponseTypes";
+import { ChapterSchemaType } from "../../db/zodSchema";
+import { chapterSchema } from "../../db/zodSchema";
+import { prisma } from "../../db/prisma";
 import { revalidatePath } from "next/cache";
 
 

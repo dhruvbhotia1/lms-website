@@ -4,7 +4,7 @@ import { XIcon } from "lucide-react";
 import { Trash2 } from "lucide-react";
 import { useTransition } from "react";
 import { useState } from "react";
-import { deleteLesson } from "@/lib/courses/delete-lesson";
+import { deleteLesson } from "@/lib/courses/lessons/delete-lesson";
 import { toast } from "sonner";
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel } from "@/components/ui/alert-dialog";
 

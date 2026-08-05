@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { chapterSchema, ChapterSchemaType } from "@/lib/zodSchema";
+import { chapterSchema, ChapterSchemaType } from "@/lib/db/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Field, FieldGroup, FieldLabel, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Controller } from "react-hook-form";
 import { useTransition } from "react";
 import { Loader, PlusIcon } from "lucide-react";
-import { createChapter } from "@/lib/courses/create-chapter";
+import { createChapter } from "@/lib/courses/chapter/create-chapter";
 import { toast } from "sonner";
 
 

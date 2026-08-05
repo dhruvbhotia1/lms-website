@@ -1,9 +1,9 @@
-import { S3 } from "@/lib/S3Client";
+import { S3 } from "@/lib/auth/S3Client";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
-import arcjet from "@/lib/arcjet";
-import { detectBot, fixedWindow } from "@/lib/arcjet";
-import { requirePublisher } from "@/app/data/publisher/require-publisher";
+import arcjet from "@/lib/auth/arcjet";
+import { detectBot, fixedWindow } from "@/lib/auth/arcjet";
+import { requirePublisher } from "@/lib/auth/require-publisher";
 
 const aj = arcjet
   .withRule(

@@ -1,6 +1,6 @@
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { redirect } from "next/navigation";
-import { requirePublisher } from "@/app/data/publisher/require-publisher";
+import { requirePublisher } from "@/lib/auth/require-publisher";
 import { SiteHeader } from "@/components/sidebar/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 

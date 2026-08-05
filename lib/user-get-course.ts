@@ -1,6 +1,6 @@
 "use server"
 
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/lib/db/prisma"
 import { notFound } from "next/navigation";
 
 export async function userGetCourse(slug: string) {

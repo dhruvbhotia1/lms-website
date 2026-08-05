@@ -3,7 +3,7 @@
 import { Loader, SparkleIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-import { courseLevel, courseStatus } from "@/lib/zodSchema";
+import { courseLevel, courseStatus } from "@/lib/db/zodSchema";
 import {
   Field,
   FieldContent,
@@ -21,17 +21,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { courseCategories } from "@/lib/zodSchema";
+import { courseCategories } from "@/lib/db/zodSchema";
 import RichTextEditor from "@/components/rich-text-editor/Editor";
 import { Uploader } from "@/components/file-uploader/Uploader";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CourseSchemaType, courseSchema } from "@/lib/zodSchema";
+import { CourseSchemaType, courseSchema } from "@/lib/db/zodSchema";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { editCourse } from "@/lib/courses/edit-course-actions";
-import type { PublisherGetCourseType } from "@/app/data/publisher/publisher-get-course";
+import type { PublisherGetCourseType } from "@/lib/courses/publisher-get-course";
 import slugify from "slugify";
 
 interface EditFormCourseProps {

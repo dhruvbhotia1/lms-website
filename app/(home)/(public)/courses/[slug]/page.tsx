@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { userGetCourse } from "@/hooks/public/course/get-course";
+import { userGetCourse } from "@/lib/user-get-course";
 import {BookIcon, BoxesIcon, ChartBarIcon, CheckIcon, ChevronDown, TimerIcon} from "lucide-react";
 import Image from "next/image"
 import {Separator} from "@/components/ui/separator";

@@ -1,13 +1,13 @@
 "use server"
 
-import { lessonSchema, LessonSchemaType } from "../zodSchema";
-import { requirePublisher } from "@/app/data/publisher/require-publisher";
+import { lessonSchema, LessonSchemaType } from "../../db/zodSchema";
+import { requirePublisher } from "@/lib/auth/require-publisher";
 import { redirect } from "next/navigation";
-import { ApiResponse } from "../types";
-import arcjet from "../arcjet";
-import { detectBot, fixedWindow } from "../arcjet";
+import { ApiResponse } from "../../auth/apiResponseTypes";
+import arcjet from "../../auth/arcjet";
+import { detectBot, fixedWindow } from "../../auth/arcjet";
 import { request } from "@arcjet/next";
-import { prisma } from "../prisma";
+import { prisma } from "../../db/prisma";
 
 interface Props {
   data: LessonSchemaType;

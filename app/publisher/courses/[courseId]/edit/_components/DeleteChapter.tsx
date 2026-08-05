@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Trash2 } from "lucide-react";
 import { useTransition } from "react";
 import { useState } from "react";
-import { deleteChapter } from "@/lib/courses/delete-chapter";
+import { deleteChapter } from "@/lib/courses/chapter/delete-chapter";
 import { toast } from "sonner";
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel } from "@/components/ui/alert-dialog";
 

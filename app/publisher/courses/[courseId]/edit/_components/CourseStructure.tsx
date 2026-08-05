@@ -3,7 +3,7 @@
 import { DragEndEvent, DraggableSyntheticListeners, rectIntersection } from "@dnd-kit/core";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { PublisherGetCourseType } from "@/app/data/publisher/publisher-get-course";
+import { PublisherGetCourseType } from "@/lib/courses/publisher-get-course";
 import { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -22,7 +22,7 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { toast } from "sonner";
-import { reorderLessons, reorderChapters } from "@/lib/reorder";
+import { reorderLessons, reorderChapters } from "@/lib/courses/reorder";
 import { NewChapterModal } from "./NewChapterModal";
 import { NewLessonModal } from "./NewLessonModal";
 import { DeleteLesson } from "./DeleteLesson";

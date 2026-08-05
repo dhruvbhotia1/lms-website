@@ -1,9 +1,9 @@
 "use server";
-import { requirePublisher } from "@/app/data/publisher/require-publisher";
-import { prisma } from "@/lib/prisma";
-import { ApiResponse } from "@/lib/types";
+import { requirePublisher } from "@/lib/auth/require-publisher";
+import { prisma } from "@/lib/db/prisma";
+import { ApiResponse } from "@/lib/auth/apiResponseTypes";
 import { deleteThumbnail } from "./delete-thumbnail";
-import arcjet from "../arcjet";
+import arcjet from "../auth/arcjet";
 import { detectBot, fixedWindow } from "arcjet";
 import { request } from "@arcjet/next";
 

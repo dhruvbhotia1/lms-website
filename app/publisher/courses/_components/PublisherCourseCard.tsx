@@ -1,8 +1,8 @@
-import { PublisherCourseType } from "@/app/data/publisher/publisher-get-courses";
+import { PublisherCourseType } from "@/lib/courses/publisher-get-courses";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useConstructUrl } from "@/hooks/use-construct-url";
+import { useConstructUrl } from "@/lib/use-construct-url";
 
 import { School, TimerIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";

@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useTransition } from "react";
-import { makeUserPublisher } from "@/hooks/make-user-publisher";
+import { makeUserPublisher } from "@/lib/auth/make-user-publisher";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 

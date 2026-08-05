@@ -1,9 +1,9 @@
 "use server";
 
-import { lessonSchema, LessonSchemaType } from "../zodSchema";
-import { requirePublisher } from "@/app/data/publisher/require-publisher";
-import { ApiResponse } from "../types";
-import { prisma } from "../prisma";
+import { lessonSchema, LessonSchemaType } from "../../db/zodSchema";
+import { requirePublisher } from "@/lib/auth/require-publisher";
+import { ApiResponse } from "../../auth/apiResponseTypes";
+import { prisma } from "../../db/prisma";
 import { revalidatePath } from "next/cache";
 
 

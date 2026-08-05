@@ -1,6 +1,6 @@
 import "server-only";
-import { requirePublisher } from "./require-publisher";
-import { prisma } from "@/lib/prisma";
+import { requirePublisher } from "../auth/require-publisher";
+import { prisma } from "@/lib/db/prisma";
 import { notFound, redirect } from "next/navigation";
 
 interface Props {

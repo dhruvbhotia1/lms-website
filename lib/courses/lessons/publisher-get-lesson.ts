@@ -1,8 +1,8 @@
 
 import "server-only"
 import { notFound, redirect } from "next/navigation";
-import { requirePublisher } from "@/app/data/publisher/require-publisher";
-import { prisma } from "../prisma";
+import { requirePublisher } from "@/lib/auth/require-publisher";
+import { prisma } from "../../db/prisma";
 
 interface Props {
   lessonId: string;

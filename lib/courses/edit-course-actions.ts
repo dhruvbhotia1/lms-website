@@ -1,11 +1,11 @@
 "use server";
 
-import { requirePublisher } from "@/app/data/publisher/require-publisher";
-import { courseSchema, CourseSchemaType } from "../zodSchema";
-import { ApiResponse } from "../types";
-import { prisma } from "../prisma";
-import arcjet from "../arcjet";
-import { detectBot, fixedWindow } from "../arcjet";
+import { requirePublisher } from "@/lib/auth/require-publisher";
+import { courseSchema, CourseSchemaType } from "../db/zodSchema";
+import { ApiResponse } from "../auth/apiResponseTypes";
+import { prisma } from "../db/prisma";
+import arcjet from "../auth/arcjet";
+import { detectBot, fixedWindow } from "../auth/arcjet";
 import { request } from "@arcjet/next";
 
 interface Props {

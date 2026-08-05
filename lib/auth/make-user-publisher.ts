@@ -1,9 +1,9 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/db/prisma";
 import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
-import { ApiResponse } from "@/lib/types";
+import { auth } from "@/lib/auth/auth";
+import { ApiResponse } from "@/lib/auth/apiResponseTypes";
 
 export const makeUserPublisher = async (email: string): Promise<ApiResponse> => {
   const session = await auth.api.getSession({

@@ -1,10 +1,10 @@
 "use server"
 
-import { requirePublisher } from "@/app/data/publisher/require-publisher";
-import { ApiResponse } from "../types";
-import { prisma } from "../prisma";
+import { requirePublisher } from "@/lib/auth/require-publisher";
+import { ApiResponse } from "../../auth/apiResponseTypes";
+import { prisma } from "../../db/prisma";
 import { revalidatePath } from "next/cache";
-import arcjet from "../arcjet";
+import arcjet from "../../auth/arcjet";
 import { detectBot, fixedWindow } from "arcjet";
 import { request } from "@arcjet/next";
 
