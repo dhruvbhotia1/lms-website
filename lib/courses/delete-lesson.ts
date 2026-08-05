@@ -1,6 +1,6 @@
 "use server";
 
-import { requireAdmin } from "@/app/data/admin/require-admin";
+import { requirePublisher } from "@/app/data/publisher/require-publisher";
 import { ApiResponse } from "../types";
 import { prisma } from "../prisma";
 import { revalidatePath } from "next/cache";
@@ -18,7 +18,7 @@ interface Props {
 
 export async function deleteLesson({ chapterId, lessonId, name, courseId }: Props): Promise<ApiResponse> {
 
-  const session = await requireAdmin();
+  const session = await requirePublisher();
 
   if (!session) {
     return { status: "error", message: "Unauthorized" };
@@ -60,7 +60,7 @@ export async function deleteLesson({ chapterId, lessonId, name, courseId }: Prop
       }
     });
 
-    revalidatePath(`/admin/courses/${courseId}/edit`);
+    revalidatePath(`/publisher/courses/${courseId}/edit`);
 
     return { status: "success", message: "Lesson deleted successfully" };
   } else {

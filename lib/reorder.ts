@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache"
 import { prisma } from "./prisma"
 import { ApiResponse } from "./types"
-import { requireAdmin } from "@/app/data/admin/require-admin"
+import { requirePublisher } from "@/app/data/publisher/require-publisher"
 
 
 
@@ -26,7 +26,7 @@ interface ChapterReorderProps {
 
 export const reorderLessons = async ({ chapterId, lessons, courseId }: LessonReorderProps): Promise<ApiResponse> => {
 
-  await requireAdmin();
+  await requirePublisher();
 
   try {
 
@@ -48,7 +48,7 @@ export const reorderLessons = async ({ chapterId, lessons, courseId }: LessonReo
 
     await prisma.$transaction(updates);
 
-    revalidatePath(`/admin/courses/${courseId}/edit`); //update the on the frontend...
+    revalidatePath(`/publisher/courses/${courseId}/edit`); //update the on the frontend...
 
     return { status: "success", message: "Lessons reordered successfully." }
 
@@ -60,7 +60,7 @@ export const reorderLessons = async ({ chapterId, lessons, courseId }: LessonReo
 
 export const reorderChapters = async ({ chapters, courseId }: ChapterReorderProps): Promise<ApiResponse> => {
 
-  await requireAdmin();
+  await requirePublisher();
 
   try {
 
@@ -79,7 +79,7 @@ export const reorderChapters = async ({ chapters, courseId }: ChapterReorderProp
 
     await prisma.$transaction(updates);
 
-    revalidatePath(`/admin/courses/${courseId}/edit`); //update the on the frontend...
+    revalidatePath(`/publisher/courses/${courseId}/edit`); //update the on the frontend...
 
     return { status: "success", message: "Chapters reordered successfully." }
 

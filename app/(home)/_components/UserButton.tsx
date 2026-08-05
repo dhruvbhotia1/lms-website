@@ -91,9 +91,9 @@ export function UserButton({user}: Props) {
                         </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                        <Link href={'/admin'}>
+                        <Link href={'/publisher'}>
 
-                            {/*redirect to admin page check if the user has a admin profile, if not prompt them to make one , if yes let them access admin however the url will be changed to admin-admin or something to reduce the number of filter checks in middleware*/}
+                            {/*redirect to publisher page check if the user has a publisher profile, if not prompt them to make one , if yes let them access publisher however the url will be changed to publisher-publisher or something to reduce the number of filter checks in middleware*/}
 
                             <PenBoxIcon aria-hidden="true" className="opacity-60" size={16} />
                             <span>Publish</span>

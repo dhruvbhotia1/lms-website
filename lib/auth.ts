@@ -37,7 +37,10 @@ export const auth = betterAuth({
         console.log("Email sent. with id", data?.id);
       },
     }),
-    admin(),
+    admin({
+      defaultRole: "Customer",
+      adminRole: "Publisher"
+    }),
   ],
 
   socialProviders: {

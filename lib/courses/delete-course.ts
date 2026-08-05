@@ -1,5 +1,5 @@
 "use server";
-import { requireAdmin } from "@/app/data/admin/require-admin";
+import { requirePublisher } from "@/app/data/publisher/require-publisher";
 import { prisma } from "@/lib/prisma";
 import { ApiResponse } from "@/lib/types";
 import { deleteThumbnail } from "./delete-thumbnail";
@@ -29,7 +29,7 @@ const aj = arcjet
   );
 
 export const deleteCourse = async ({ courseId, userEmail, name }: Props): Promise<ApiResponse> => {
-  const session = await requireAdmin(); // authenticate before calling this api.
+  const session = await requirePublisher(); // authenticate before calling this api.
 
   if (!session) {
     return {
@@ -39,7 +39,7 @@ export const deleteCourse = async ({ courseId, userEmail, name }: Props): Promis
   }
 
   const decision = await aj.protect(await request(), {
-        fingerprint: session?.user.id,
+        fingerprint: session.user.id,
   }); // rate limiting for creating courses (form submissions).
 
   if (decision.isDenied()) {
@@ -69,7 +69,7 @@ export const deleteCourse = async ({ courseId, userEmail, name }: Props): Promis
 
   //IMPLEMENT PASSWORD COMPARISON OR OTP VERIFICATION BEFORE DELETING.
 
-  const isAuthorized = session.user.id === courseToDelete.userId! && session.user.email === userEmail;
+  const isAuthorized = session.user.id === courseToDelete.userId && session.user.email === userEmail;
 
   if (isAuthorized && courseToDelete.title === name) {
     const deleteThumbnailResult = await deleteThumbnail({ courseThumbnailKey: courseToDelete.thumbnail });

@@ -1,7 +1,7 @@
 "use server";
 
 import { lessonSchema, LessonSchemaType } from "../zodSchema";
-import { requireAdmin } from "@/app/data/admin/require-admin";
+import { requirePublisher } from "@/app/data/publisher/require-publisher";
 import { ApiResponse } from "../types";
 import { prisma } from "../prisma";
 import { revalidatePath } from "next/cache";
@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 
 export async function createLesson(values: LessonSchemaType): Promise<ApiResponse> {
 
-  if (!requireAdmin()) {
+  if (!requirePublisher()) {
     return { status: "error", message: "Unauthorized" };
   }
 
@@ -47,7 +47,7 @@ export async function createLesson(values: LessonSchemaType): Promise<ApiRespons
           }
         })
 
-        revalidatePath(`/admin/courses/${result.data.courseId}/edit`);
+        revalidatePath(`/publisher/courses/${result.data.courseId}/edit`);
       }
     );
 

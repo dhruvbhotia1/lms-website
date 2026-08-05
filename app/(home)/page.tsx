@@ -27,7 +27,7 @@ const features: FeatureProps[] = [
   {
     title: "Progess tracking",
     description:
-      "Monitor your progress and achievements with detailed analytics and personalized admin",
+      "Monitor your progress and achievements with detailed analytics and personalized publisher",
     icon: "📊",
   },
   {

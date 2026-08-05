@@ -76,3 +76,8 @@ export type Chapter = Prisma.ChapterModel
  * 
  */
 export type Lesson = Prisma.LessonModel
+/**
+ * Model Enrollment
+ * 
+ */
+export type Enrollment = Prisma.EnrollmentModel

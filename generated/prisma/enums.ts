@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const role = {
+  Publisher: 'Publisher',
+  Customer: 'Customer'
+} as const
+
+export type role = (typeof role)[keyof typeof role]
+
+
 export const CourseLevel = {
   Beginner: 'Beginner',
   Intermediate: 'Intermediate',
@@ -43,3 +51,12 @@ export const CourseCategory = {
 } as const
 
 export type CourseCategory = (typeof CourseCategory)[keyof typeof CourseCategory]
+
+
+export const EnrollmentStatus = {
+  Pending: 'Pending',
+  Active: 'Active',
+  Cancelled: 'Cancelled'
+} as const
+
+export type EnrollmentStatus = (typeof EnrollmentStatus)[keyof typeof EnrollmentStatus]

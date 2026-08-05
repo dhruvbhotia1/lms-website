@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3 } from "@/lib/S3Client";
 import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
-import { requireAdmin } from "@/app/data/admin/require-admin";
+import { requirePublisher } from "@/app/data/publisher/require-publisher";
 
 export const fileUploadSchema = z.object({
   fileName: z.string().min(1, { message: "File name is required." }),
@@ -31,13 +31,13 @@ const aj = arcjet
   );
 
 export async function POST(request: Request) {
-  const session = await requireAdmin();
+  const session = await requirePublisher();
 
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  //we dont have to check for admin here because when we create the course we check if the admin is creating the course or not.
+  //we dont have to check for publisher here because when we create the course we check if the publisher is creating the course or not.
 
   try {
     const decision = await aj.protect(request, { fingerprint: session!.user.id }); // rate limiting for uploading images to the s3 bucket

@@ -57,7 +57,8 @@ export const ModelName = {
   Verification: 'Verification',
   Course: 'Course',
   Chapter: 'Chapter',
-  Lesson: 'Lesson'
+  Lesson: 'Lesson',
+  Enrollment: 'Enrollment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -84,6 +85,7 @@ export const UserScalarFieldEnum = {
   image: 'image',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  stripeCustomerId: 'stripeCustomerId',
   role: 'role',
   banned: 'banned',
   banReason: 'banReason',
@@ -185,6 +187,19 @@ export const LessonScalarFieldEnum = {
 } as const
 
 export type LessonScalarFieldEnum = (typeof LessonScalarFieldEnum)[keyof typeof LessonScalarFieldEnum]
+
+
+export const EnrollmentScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  createAt: 'createAt',
+  updatedAt: 'updatedAt',
+  courseId: 'courseId',
+  userId: 'userId',
+  status: 'status'
+} as const
+
+export type EnrollmentScalarFieldEnum = (typeof EnrollmentScalarFieldEnum)[keyof typeof EnrollmentScalarFieldEnum]
 
 
 export const SortOrder = {

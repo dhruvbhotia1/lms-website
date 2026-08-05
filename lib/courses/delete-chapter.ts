@@ -1,11 +1,11 @@
 "use server"
 
-import { requireAdmin } from "@/app/data/admin/require-admin";
+import { requirePublisher } from "@/app/data/publisher/require-publisher";
 import { ApiResponse } from "../types";
 import { prisma } from "../prisma";
 import { revalidatePath } from "next/cache";
 import arcjet from "../arcjet";
-import { detectBot, fixedWindow } from "../arcjet";
+import { detectBot, fixedWindow } from "arcjet";
 import { request } from "@arcjet/next";
 
 interface Props {
@@ -34,10 +34,10 @@ const aj = arcjet
 
 export async function deleteChapter({ name, chapterId, courseId, email }: Props): Promise<ApiResponse> {
 
-  const session = await requireAdmin();
+  const session = await requirePublisher();
 
   if (!session) {
-    return { status: "error", message: "You must be an admin to delete a chapter" }
+    return { status: "error", message: "You must be an publisher to delete a chapter" }
   }
 
   const decision = await aj.protect(await request(), {
@@ -58,11 +58,7 @@ export async function deleteChapter({ name, chapterId, courseId, email }: Props)
       course: {
         select: {
           userId: true,
-          user: {
-            select: {
-              email: true,
-            }
-          }
+
         }
       }
     }
@@ -72,7 +68,7 @@ export async function deleteChapter({ name, chapterId, courseId, email }: Props)
     return { status: "error", message: "Chapter not found" }
   }
 
-  const isAuthorized = session.user.id === chapterToDelete.course.userId && chapterToDelete.course.user.email === session.user.email && chapterToDelete.course.user.email === email;
+  const isAuthorized = session.user.id === chapterToDelete.course.userId  &&  session.user.email === email;
 
   if (isAuthorized && chapterToDelete.title === name) {
 
@@ -83,7 +79,7 @@ export async function deleteChapter({ name, chapterId, courseId, email }: Props)
       }
     }); //ensuring only that chapter is deleted.
 
-    revalidatePath(`/admin/courses/${courseId}/edit`);
+    revalidatePath(`/publisher/courses/${courseId}/edit`);
 
     return {status: "success", message: "Chapter deleted successfully"}
   } else {

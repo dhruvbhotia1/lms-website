@@ -3,7 +3,7 @@
 import { courseSchema, CourseSchemaType } from "../zodSchema";
 import { prisma } from "@/lib/prisma";
 import { ApiResponse } from "../types";
-import { requireAdmin } from "@/app/data/admin/require-admin";
+import { requirePublisher} from "@/app/data/publisher/require-publisher";
 import arcjet from "../arcjet";
 import { detectBot, fixedWindow } from "../arcjet";
 import { request } from "@arcjet/next";
@@ -27,10 +27,10 @@ const aj = arcjet
 export async function createCourse(
   values: CourseSchemaType,
 ): Promise<ApiResponse> {
-  const session = await requireAdmin(); //checks for logged in user and admin roles presence.
+  const session = await requirePublisher(); //checks for logged in user and publisher roles presence.
 
   if (!session) {
-    return redirect('/become-admin');
+    return redirect('/become-publisher');
   }
 
   try {
@@ -51,7 +51,7 @@ export async function createCourse(
       return {
         status: "error",
         message:
-          "You must be logged in and have admin privileges to create a course.",
+          "You must be logged in and have publisher privileges to create a course.",
       };
     }
 
@@ -64,7 +64,7 @@ export async function createCourse(
     //     status: "error",
     //     message: "You must be logged in to create a course.",
     //   };
-    // } commented out this validation because now we can use the session from the requireAdmin function
+    // } commented out this validation because now we can use the session from the requirePublisher function
 
     if (!validation.success) {
       return {

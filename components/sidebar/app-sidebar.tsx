@@ -33,7 +33,7 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "/admin",
+      url: "/publisher",
       icon: (
         <LayoutDashboardIcon
         />
@@ -41,7 +41,7 @@ const data = {
     },
     {
       title: "Courses",
-      url: "/admin/courses",
+      url: "/publisher/courses",
       icon: (
         <ListIcon
         />

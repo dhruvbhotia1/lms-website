@@ -1,7 +1,7 @@
 "use server"
 
 import { lessonSchema, LessonSchemaType } from "../zodSchema";
-import { requireAdmin } from "@/app/data/admin/require-admin";
+import { requirePublisher } from "@/app/data/publisher/require-publisher";
 import { redirect } from "next/navigation";
 import { ApiResponse } from "../types";
 import arcjet from "../arcjet";
@@ -31,10 +31,10 @@ const aj = arcjet
 
 export async function lessonConfigure({ data, lessonId}: Props): Promise<ApiResponse> {
 
-  const session = requireAdmin();
+  const session = requirePublisher();
 
   if (!session) {
-    return redirect(`/become-admin`);
+    return redirect(`/become-publisher`);
   }
 
   try {

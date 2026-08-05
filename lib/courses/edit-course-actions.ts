@@ -1,6 +1,6 @@
 "use server";
 
-import { requireAdmin } from "@/app/data/admin/require-admin";
+import { requirePublisher } from "@/app/data/publisher/require-publisher";
 import { courseSchema, CourseSchemaType } from "../zodSchema";
 import { ApiResponse } from "../types";
 import { prisma } from "../prisma";
@@ -29,7 +29,7 @@ const aj = arcjet
   );
 
 export async function editCourse({ values, courseId }: Props): Promise<ApiResponse> {
-  const session = await requireAdmin();
+  const session = await requirePublisher();
   try {
     const decision = await aj.protect(await request(), {
       fingerprint: session?.user.id,

@@ -1,6 +1,6 @@
 "use server";
 
-import { requireAdmin } from "@/app/data/admin/require-admin";
+import { requirePublisher } from "@/app/data/publisher/require-publisher";
 import { ApiResponse } from "../types";
 import { ChapterSchemaType } from "../zodSchema";
 import { chapterSchema } from "../zodSchema";
@@ -10,8 +10,8 @@ import { revalidatePath } from "next/cache";
 
 export async function createChapter(values: ChapterSchemaType): Promise<ApiResponse> {
 
-  if (!requireAdmin()) {
-    return { status: "error", message: "You are not an admin" };
+  if (!requirePublisher()) {
+    return { status: "error", message: "You are not an publisher" };
   }
 
   try {
@@ -52,7 +52,7 @@ export async function createChapter(values: ChapterSchemaType): Promise<ApiRespo
       }
     );
 
-    revalidatePath(`admin/courses/${result.data.courseId}/edit`);
+    revalidatePath(`/publisher/courses/${result.data.courseId}/edit`);
     return { status: "success", message: "Chapter created successfully" };
   } catch {
     return { status: "error", message: "Failed to create chapter" };
