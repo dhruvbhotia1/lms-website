@@ -8,6 +8,7 @@ import {Collapsible, CollapsibleTrigger, CollapsibleContent} from "@/components/
 import {Card, CardContent} from "@/components/ui/card";
 import {TbPlayerPlayFilled} from "react-icons/tb";
 import {Button} from "@/components/ui/button";
+import {enrollInCourse} from "@/lib/courses/enroll-in-course";
 
 
 type Params = Promise<{ slug: string }>;
@@ -243,7 +244,18 @@ export default async function UserCoursePage({ params }: { params: Params }) {
 
               </div>
 
-              <Button className={"w-full"}>Enroll Now!</Button>
+              <form action={async () => {
+                "use server"
+                await enrollInCourse({courseId: course.id})
+              }}>
+
+                <Button className={"w-full"}>
+
+                  Enroll Now!
+
+                </Button>
+
+              </form>
               <p className={"mt-3 text-center text-xs text-muted-foreground"}>30-day money-back guaranteed</p>
             </CardContent>
           </Card>

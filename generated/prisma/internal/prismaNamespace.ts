@@ -1157,7 +1157,7 @@ export type LessonScalarFieldEnum = (typeof LessonScalarFieldEnum)[keyof typeof 
 export const EnrollmentScalarFieldEnum = {
   id: 'id',
   amount: 'amount',
-  createAt: 'createAt',
+  createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   courseId: 'courseId',
   userId: 'userId',
