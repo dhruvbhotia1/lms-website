@@ -1111,6 +1111,7 @@ export const CourseScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId',
+  stripePriceId: 'stripePriceId',
   title: 'title',
   description: 'description',
   fileKey: 'fileKey',

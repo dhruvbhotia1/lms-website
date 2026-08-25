@@ -18,7 +18,7 @@ const navigationItems = [
   },
   {
     name: "Dashboard",
-    href: "/learner-dashboard",
+    href: "/learner-learner-dashboard",
   },
 ];
 

@@ -41,6 +41,7 @@ export type CourseMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   userId: string | null
+  stripePriceId: string | null
   title: string | null
   description: string | null
   fileKey: string | null
@@ -59,6 +60,7 @@ export type CourseMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   userId: string | null
+  stripePriceId: string | null
   title: string | null
   description: string | null
   fileKey: string | null
@@ -77,6 +79,7 @@ export type CourseCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   userId: number
+  stripePriceId: number
   title: number
   description: number
   fileKey: number
@@ -107,6 +110,7 @@ export type CourseMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   userId?: true
+  stripePriceId?: true
   title?: true
   description?: true
   fileKey?: true
@@ -125,6 +129,7 @@ export type CourseMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   userId?: true
+  stripePriceId?: true
   title?: true
   description?: true
   fileKey?: true
@@ -143,6 +148,7 @@ export type CourseCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   userId?: true
+  stripePriceId?: true
   title?: true
   description?: true
   fileKey?: true
@@ -248,6 +254,7 @@ export type CourseGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   userId: string
+  stripePriceId: string
   title: string
   description: string
   fileKey: string
@@ -289,6 +296,7 @@ export type CourseWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Course"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Course"> | Date | string
   userId?: Prisma.StringFilter<"Course"> | string
+  stripePriceId?: Prisma.StringFilter<"Course"> | string
   title?: Prisma.StringFilter<"Course"> | string
   description?: Prisma.StringFilter<"Course"> | string
   fileKey?: Prisma.StringFilter<"Course"> | string
@@ -310,6 +318,7 @@ export type CourseOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   fileKey?: Prisma.SortOrder
@@ -328,6 +337,7 @@ export type CourseOrderByWithRelationInput = {
 
 export type CourseWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  stripePriceId?: string
   slug?: string
   AND?: Prisma.CourseWhereInput | Prisma.CourseWhereInput[]
   OR?: Prisma.CourseWhereInput[]
@@ -348,13 +358,14 @@ export type CourseWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   chapters?: Prisma.ChapterListRelationFilter
   enrollment?: Prisma.EnrollmentListRelationFilter
-}, "id" | "slug">
+}, "id" | "stripePriceId" | "slug">
 
 export type CourseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   fileKey?: Prisma.SortOrder
@@ -381,6 +392,7 @@ export type CourseScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Course"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Course"> | Date | string
   userId?: Prisma.StringWithAggregatesFilter<"Course"> | string
+  stripePriceId?: Prisma.StringWithAggregatesFilter<"Course"> | string
   title?: Prisma.StringWithAggregatesFilter<"Course"> | string
   description?: Prisma.StringWithAggregatesFilter<"Course"> | string
   fileKey?: Prisma.StringWithAggregatesFilter<"Course"> | string
@@ -398,6 +410,7 @@ export type CourseCreateInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  stripePriceId: string
   title: string
   description: string
   fileKey: string
@@ -419,6 +432,7 @@ export type CourseUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
+  stripePriceId: string
   title: string
   description: string
   fileKey: string
@@ -438,6 +452,7 @@ export type CourseUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   fileKey?: Prisma.StringFieldUpdateOperationsInput | string
@@ -459,6 +474,7 @@ export type CourseUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   fileKey?: Prisma.StringFieldUpdateOperationsInput | string
@@ -479,6 +495,7 @@ export type CourseCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
+  stripePriceId: string
   title: string
   description: string
   fileKey: string
@@ -496,6 +513,7 @@ export type CourseUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   fileKey?: Prisma.StringFieldUpdateOperationsInput | string
@@ -514,6 +532,7 @@ export type CourseUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   fileKey?: Prisma.StringFieldUpdateOperationsInput | string
@@ -542,6 +561,7 @@ export type CourseCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   fileKey?: Prisma.SortOrder
@@ -565,6 +585,7 @@ export type CourseMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   fileKey?: Prisma.SortOrder
@@ -583,6 +604,7 @@ export type CourseMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   fileKey?: Prisma.SortOrder
@@ -700,6 +722,7 @@ export type CourseCreateWithoutUserInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  stripePriceId: string
   title: string
   description: string
   fileKey: string
@@ -719,6 +742,7 @@ export type CourseUncheckedCreateWithoutUserInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  stripePriceId: string
   title: string
   description: string
   fileKey: string
@@ -768,6 +792,7 @@ export type CourseScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Course"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Course"> | Date | string
   userId?: Prisma.StringFilter<"Course"> | string
+  stripePriceId?: Prisma.StringFilter<"Course"> | string
   title?: Prisma.StringFilter<"Course"> | string
   description?: Prisma.StringFilter<"Course"> | string
   fileKey?: Prisma.StringFilter<"Course"> | string
@@ -785,6 +810,7 @@ export type CourseCreateWithoutChaptersInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  stripePriceId: string
   title: string
   description: string
   fileKey: string
@@ -805,6 +831,7 @@ export type CourseUncheckedCreateWithoutChaptersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
+  stripePriceId: string
   title: string
   description: string
   fileKey: string
@@ -839,6 +866,7 @@ export type CourseUpdateWithoutChaptersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   fileKey?: Prisma.StringFieldUpdateOperationsInput | string
@@ -859,6 +887,7 @@ export type CourseUncheckedUpdateWithoutChaptersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   fileKey?: Prisma.StringFieldUpdateOperationsInput | string
@@ -877,6 +906,7 @@ export type CourseCreateWithoutEnrollmentInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  stripePriceId: string
   title: string
   description: string
   fileKey: string
@@ -897,6 +927,7 @@ export type CourseUncheckedCreateWithoutEnrollmentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
+  stripePriceId: string
   title: string
   description: string
   fileKey: string
@@ -931,6 +962,7 @@ export type CourseUpdateWithoutEnrollmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   fileKey?: Prisma.StringFieldUpdateOperationsInput | string
@@ -951,6 +983,7 @@ export type CourseUncheckedUpdateWithoutEnrollmentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   fileKey?: Prisma.StringFieldUpdateOperationsInput | string
@@ -969,6 +1002,7 @@ export type CourseCreateManyUserInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  stripePriceId: string
   title: string
   description: string
   fileKey: string
@@ -986,6 +1020,7 @@ export type CourseUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   fileKey?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1005,6 +1040,7 @@ export type CourseUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   fileKey?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1024,6 +1060,7 @@ export type CourseUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stripePriceId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   fileKey?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1082,6 +1119,7 @@ export type CourseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
+  stripePriceId?: boolean
   title?: boolean
   description?: boolean
   fileKey?: boolean
@@ -1104,6 +1142,7 @@ export type CourseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
+  stripePriceId?: boolean
   title?: boolean
   description?: boolean
   fileKey?: boolean
@@ -1123,6 +1162,7 @@ export type CourseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
+  stripePriceId?: boolean
   title?: boolean
   description?: boolean
   fileKey?: boolean
@@ -1142,6 +1182,7 @@ export type CourseSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
+  stripePriceId?: boolean
   title?: boolean
   description?: boolean
   fileKey?: boolean
@@ -1155,7 +1196,7 @@ export type CourseSelectScalar = {
   thumbnail?: boolean
 }
 
-export type CourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "userId" | "title" | "description" | "fileKey" | "price" | "duration" | "level" | "category" | "smallDescription" | "slug" | "status" | "thumbnail", ExtArgs["result"]["course"]>
+export type CourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "userId" | "stripePriceId" | "title" | "description" | "fileKey" | "price" | "duration" | "level" | "category" | "smallDescription" | "slug" | "status" | "thumbnail", ExtArgs["result"]["course"]>
 export type CourseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   chapters?: boolean | Prisma.Course$chaptersArgs<ExtArgs>
@@ -1181,6 +1222,7 @@ export type $CoursePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     createdAt: Date
     updatedAt: Date
     userId: string
+    stripePriceId: string
     title: string
     description: string
     fileKey: string
@@ -1622,6 +1664,7 @@ export interface CourseFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Course", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Course", 'DateTime'>
   readonly userId: Prisma.FieldRef<"Course", 'String'>
+  readonly stripePriceId: Prisma.FieldRef<"Course", 'String'>
   readonly title: Prisma.FieldRef<"Course", 'String'>
   readonly description: Prisma.FieldRef<"Course", 'String'>
   readonly fileKey: Prisma.FieldRef<"Course", 'String'>

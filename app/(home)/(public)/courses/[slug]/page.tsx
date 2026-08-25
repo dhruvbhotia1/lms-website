@@ -7,8 +7,11 @@ import {RenderDescription} from "@/components/rich-text-editor/RenderDescription
 import {Collapsible, CollapsibleTrigger, CollapsibleContent} from "@/components/ui/collapsible";
 import {Card, CardContent} from "@/components/ui/card";
 import {TbPlayerPlayFilled} from "react-icons/tb";
-import {Button} from "@/components/ui/button";
+import {Button, buttonVariants} from "@/components/ui/button";
 import {enrollInCourse} from "@/lib/courses/enroll-in-course";
+import {checkIfCourseBought} from "@/lib/auth/user-is-enrolled";
+import Link from "next/link";
+import {EnrollmentButton} from "@/app/(home)/(public)/courses/[slug]/_components/EnrollmentButton";
 
 
 type Params = Promise<{ slug: string }>;
@@ -18,6 +21,8 @@ export default async function UserCoursePage({ params }: { params: Params }) {
   const { slug } = await params;
 
   const course = await userGetCourse(slug);
+
+  const isEnrolled = await checkIfCourseBought({courseId: course.id});
 
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 mt-5">
@@ -249,11 +254,17 @@ export default async function UserCoursePage({ params }: { params: Params }) {
                 await enrollInCourse({courseId: course.id})
               }}>
 
-                <Button className={"w-full"}>
+                {
+                  isEnrolled ? (
+                      <Link href={"/dashboard"} className={buttonVariants({variant: 'default', className: "w-full font-semibold"})}>
 
-                  Enroll Now!
+                        Watch Now
 
-                </Button>
+                      </Link>
+                  ) : (
+                      <EnrollmentButton courseId={course.id}/>
+                  )
+                }
 
               </form>
               <p className={"mt-3 text-center text-xs text-muted-foreground"}>30-day money-back guaranteed</p>

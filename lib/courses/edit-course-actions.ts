@@ -70,7 +70,7 @@ export async function editCourse({ values, courseId }: Props): Promise<ApiRespon
 
     return {
       status: "success",
-      message: "Succesfully implemented your edits.",
+      message: "Successfully implemented your edits.",
     };
   } catch (error) {
     return {

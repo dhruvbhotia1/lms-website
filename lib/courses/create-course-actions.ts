@@ -8,6 +8,8 @@ import arcjet from "../auth/arcjet";
 import { detectBot, fixedWindow } from "../auth/arcjet";
 import { request } from "@arcjet/next";
 import { redirect } from "next/navigation";
+import {stripe} from "@/lib/stripe";
+import {renderTipTapToPlainText} from "@/lib/tiptap-utils";
 
 const aj = arcjet
   .withRule(
@@ -73,9 +75,22 @@ export async function createCourse(
       };
     }
 
+    const data = await stripe.products.create({
+      name: validation.data.title,
+      description: renderTipTapToPlainText(validation.data.smallDescription) || undefined,
+      default_price_data: {
+        currency: "usd",
+        unit_amount: validation.data.price * 100,
+
+
+      }
+
+    })
+
     await prisma.course.create({
       data: {
         ...validation.data,
+        stripePriceId: data.default_price as string,
         userId: session!.user.id,
       },
     });
