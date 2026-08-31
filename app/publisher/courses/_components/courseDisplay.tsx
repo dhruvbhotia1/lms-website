@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-import { publisherGetCourses } from "@/lib/courses/publisher-get-courses";
-import { PublisherCourseCard } from "./_components/PublisherCourseCard";
+import { publisherGetCourses } from "@/lib/courses/publisher/publisher-get-courses";
+import { PublisherCourseCard } from "../_components/PublisherCourseCard";
 import { EmptyState } from "@/components/EmptyState";
 import { Suspense } from "react";
-import { PublisherCourseCardSkeleton } from "./_components/PublisherCourseCard";
+import { PublisherCourseCardSkeleton } from "../_components/PublisherCourseCard";
 
 export default function CoursePage() {
 
   return (
     <>
-      <div className={"flex items-center justify-between"}>
+      <div className={"flex items-center justify-between mb-10 border border-primary p-4 rounded-lg "}>
         <h1 className={"text-2xl font-bold"}>Your courses</h1>
 
         <Link

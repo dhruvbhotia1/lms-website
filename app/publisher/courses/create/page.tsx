@@ -33,7 +33,7 @@ import {
 import { courseCategories } from "@/lib/db/zodSchema";
 import RichTextEditor from "@/components/rich-text-editor/Editor";
 import { Uploader } from "@/components/file-uploader/Uploader";
-import { createCourse } from "@/lib/courses/create-course-actions";
+import { createCourse } from "@/lib/courses/publisher/create-course-actions";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
@@ -74,7 +74,7 @@ export default function CourseCreatePage() {
           toast.success(result.message);
           triggerConfetti();
           form.reset();
-          router.push("/publisher/courses");
+          router.push("/publisher/");
         } else if (result.status === "error") {
           toast.error(result.message);
         }

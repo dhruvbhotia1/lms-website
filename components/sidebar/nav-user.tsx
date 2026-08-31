@@ -20,7 +20,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { EllipsisVerticalIcon, CircleUserRoundIcon, CreditCardIcon, BellIcon, LogOutIcon } from "lucide-react"
+import { EllipsisVerticalIcon, CircleUserRoundIcon, CreditCardIcon, LogOutIcon } from "lucide-react"
 import {authClient} from "@/lib/auth/auth-client";
 import {Button} from "@/components/ui/button";
 import {toast} from "sonner";
@@ -97,10 +97,10 @@ export function NavUser({user}: Props) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-               <Link href={'/'}>
+               <Link href={'/settings'}>
                  <CircleUserRoundIcon
                  />
-                 Home
+                 Settings
                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>

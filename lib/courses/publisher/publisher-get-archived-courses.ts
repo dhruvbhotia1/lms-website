@@ -1,11 +1,11 @@
 import "server-only"
 
 import { prisma } from "@/lib/db/prisma";
-import { requirePublisher } from "../auth/require-publisher";
+import { requirePublisher } from "../../auth/require-publisher";
 import { notFound } from "next/navigation";
 import { redirect } from "next/navigation";
 
-export async function publisherGetCourses() {
+export async function publisherGetArchivedCourses() {
 
   await new Promise((resolve) => setTimeout(resolve, 5000));
 
@@ -18,6 +18,7 @@ export async function publisherGetCourses() {
   const data = await prisma.course.findMany({
     where: {
       userId: session.user.id,
+      status: "Archive"
     },
     orderBy: {
       createdAt: "desc",
@@ -44,4 +45,4 @@ export async function publisherGetCourses() {
   return data;
 }
 
-export type PublisherCourseType = Awaited<ReturnType<typeof publisherGetCourses>>[0];
+export type PublisherCourseType = Awaited<ReturnType<typeof publisherGetArchivedCourses>>[0];

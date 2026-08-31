@@ -1,4 +1,4 @@
-import { PublisherCourseType } from "@/lib/courses/publisher-get-courses";
+import { PublisherCourseType } from "@/lib/courses/publisher/publisher-get-courses";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";

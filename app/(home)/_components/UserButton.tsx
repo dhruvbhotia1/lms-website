@@ -85,7 +85,7 @@ export function UserButton({user}: Props) {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                     <DropdownMenuItem asChild>
-                        <Link href={'/user-setting'}>
+                        <Link href={'/settings'}>
                             <BoltIcon aria-hidden="true" className="opacity-60" size={16} />
                             <span>Settings</span>
                         </Link>
@@ -109,7 +109,7 @@ export function UserButton({user}: Props) {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                     <DropdownMenuItem asChild>
-                       <Link href={'/conversation'}>
+                       <Link href={'/dms'}>
 
                            {/*connect messaging app*/}
 

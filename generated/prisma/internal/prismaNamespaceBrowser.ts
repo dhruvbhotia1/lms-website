@@ -196,6 +196,7 @@ export const EnrollmentScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   courseId: 'courseId',
+  courseOwnerId: 'courseOwnerId',
   userId: 'userId',
   status: 'status'
 } as const

@@ -30,8 +30,8 @@ import { CourseSchemaType, courseSchema } from "@/lib/db/zodSchema";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { editCourse } from "@/lib/courses/edit-course-actions";
-import type { PublisherGetCourseType } from "@/lib/courses/publisher-get-course";
+import { editCourse } from "@/lib/courses/publisher/edit-course-actions";
+import type { PublisherGetCourseType } from "@/lib/courses/publisher/publisher-get-course";
 import slugify from "slugify";
 
 interface EditFormCourseProps {

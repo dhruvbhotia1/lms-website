@@ -3,7 +3,7 @@ import { requirePublisher } from "@/lib/auth/require-publisher";
 import { prisma } from "@/lib/db/prisma";
 import { ApiResponse } from "@/lib/auth/apiResponseTypes";
 import { deleteThumbnail } from "./delete-thumbnail";
-import arcjet from "../auth/arcjet";
+import arcjet from "../../auth/arcjet";
 import { detectBot, fixedWindow } from "arcjet";
 import { request } from "@arcjet/next";
 

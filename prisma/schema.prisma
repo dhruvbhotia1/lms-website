@@ -172,6 +172,7 @@ model Enrollment {
 
   course   Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
   courseId String
+  courseOwnerId String
   user     User?            @relation(fields: [userId], references: [id])
   userId   String?
   status   EnrollmentStatus @default(Pending)

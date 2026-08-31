@@ -24,7 +24,7 @@ const aj = arcjet.withRule(
 
 export async function enrollInCourse({courseId}: Props): Promise<ApiResponse | never> {
 
-    const {user} = await requireUser();
+    const {user} = await requireUser(); //destructuring user from the session.
 
     let checkoutUrl: string;
 
@@ -142,6 +142,7 @@ export async function enrollInCourse({courseId}: Props): Promise<ApiResponse | n
                     data: {
                         userId: user.id,
                         courseId: course.id,
+                        courseOwnerId: user.id,
                         amount: course.price,
                         status: "Pending",
                     }

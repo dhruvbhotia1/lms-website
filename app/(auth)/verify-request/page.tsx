@@ -153,8 +153,6 @@ export default function VerifyRequest() {
                 <Button className={"w-full flex justify-center mt-4 font-semibold"} onClick={resendOTP} disabled={resendPending || countdown > 0}>
                     {countdown > 0 ? `${countdown} seconds to resend again.` : "Resend OTP"}
                 </Button>
-
-
             </CardContent>
         </Card>
     )

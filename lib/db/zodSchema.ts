@@ -52,6 +52,27 @@ export const lessonSchema = z.object({
   videoKey: z.string().optional(),
 })
 
+export const changeEmailSchema = z.object({
+  oldEmail: z.string().min(3),
+  newEmail: z.string().min(3),
+})
+
+export const changePasswordSchema = z.object({
+  oldPassword: z.string().min(6),
+  newPassword: z.string().min(6),
+
+})
+
+export const changeNameSchema = z.object({
+  oldName: z.string().min(6),
+  newName: z.string().min(6),
+})
+
 export type CourseSchemaType = z.infer<typeof courseSchema>;
 export type ChapterSchemaType = z.infer<typeof chapterSchema>;
 export type LessonSchemaType = z.infer<typeof lessonSchema>;
+export type ChangeEmailSchemaType = z.infer<typeof changeEmailSchema>;
+export type ChangeNameSchemaType = z.infer<typeof changeNameSchema>;
+export type ChangePasswordSchemaType = z.infer<typeof changePasswordSchema>;
+
+

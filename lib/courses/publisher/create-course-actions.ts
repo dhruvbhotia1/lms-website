@@ -1,11 +1,11 @@
 "use server";
 
-import { courseSchema, CourseSchemaType } from "../db/zodSchema";
+import { courseSchema, CourseSchemaType } from "../../db/zodSchema";
 import { prisma } from "@/lib/db/prisma";
-import { ApiResponse } from "../auth/apiResponseTypes";
+import { ApiResponse } from "../../auth/apiResponseTypes";
 import { requirePublisher} from "@/lib/auth/require-publisher";
-import arcjet from "../auth/arcjet";
-import { detectBot, fixedWindow } from "../auth/arcjet";
+import arcjet from "../../auth/arcjet";
+import { detectBot, fixedWindow } from "../../auth/arcjet";
 import { request } from "@arcjet/next";
 import { redirect } from "next/navigation";
 import {stripe} from "@/lib/stripe";

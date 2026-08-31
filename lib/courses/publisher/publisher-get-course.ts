@@ -1,5 +1,5 @@
 import "server-only";
-import { requirePublisher } from "../auth/require-publisher";
+import { requirePublisher } from "../../auth/require-publisher";
 import { prisma } from "@/lib/db/prisma";
 import { notFound, redirect } from "next/navigation";
 
@@ -33,7 +33,7 @@ export async function publisherGetCourse({ courseId }: Props) {
       slug: true,
       smallDescription: true,
       thumbnail: true,
-      userId: true, // to validate ownership before displaying the course on the page.tsx
+      userId: true, // to validate ownership before displaying the course on the publisher page
       chapters: {
         orderBy: {
           position: "asc",

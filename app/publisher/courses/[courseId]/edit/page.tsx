@@ -1,4 +1,4 @@
-import { publisherGetCourse } from "@/lib/courses/publisher-get-course";
+import { publisherGetCourse } from "@/lib/courses/publisher/publisher-get-course";
 import {
   Card,
   CardDescription,

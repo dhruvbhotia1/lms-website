@@ -1,11 +1,11 @@
 "use server";
 
 import { requirePublisher } from "@/lib/auth/require-publisher";
-import { courseSchema, CourseSchemaType } from "../db/zodSchema";
-import { ApiResponse } from "../auth/apiResponseTypes";
-import { prisma } from "../db/prisma";
-import arcjet from "../auth/arcjet";
-import { detectBot, fixedWindow } from "../auth/arcjet";
+import { courseSchema, CourseSchemaType } from "../../db/zodSchema";
+import { ApiResponse } from "../../auth/apiResponseTypes";
+import { prisma } from "../../db/prisma";
+import arcjet from "../../auth/arcjet";
+import { detectBot, fixedWindow } from "../../auth/arcjet";
 import { request } from "@arcjet/next";
 
 interface Props {
@@ -75,7 +75,7 @@ export async function editCourse({ values, courseId }: Props): Promise<ApiRespon
   } catch (error) {
     return {
       status: "error",
-      message: "Failed to edit course.Please recheck all values. Remember slugs of your courses should be unique.",
+      message: "Failed to edit course. Please recheck all values. Remember slugs of your courses should be unique.",
     };
   }
 }

@@ -3,7 +3,7 @@
 import { DragEndEvent, DraggableSyntheticListeners, rectIntersection } from "@dnd-kit/core";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { PublisherGetCourseType } from "@/lib/courses/publisher-get-course";
+import { PublisherGetCourseType } from "@/lib/courses/publisher/publisher-get-course";
 import { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";

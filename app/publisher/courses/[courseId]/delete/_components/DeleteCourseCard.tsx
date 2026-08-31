@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { useTransition, useState } from "react";
 import { toast } from "sonner";
 import { TrashIcon } from "lucide-react";
-import { deleteCourse } from "@/lib/courses/delete-course";
+import { deleteCourse } from "@/lib/courses/publisher/delete-course";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -41,7 +41,7 @@ export function DeleteCourseCard({ courseId }: Props) {
 
         if (result.status === "success") {
           toast.success("Course deleted successfully");
-          router.push("/publisher/courses");
+          router.push("/publisher/");
         } else {
           toast.error(result.message);
         }
